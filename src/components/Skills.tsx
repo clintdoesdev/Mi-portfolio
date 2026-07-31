@@ -38,7 +38,7 @@ export function Skills() {
       <div className="mx-auto max-w-6xl px-6">
         <Eyebrow>Skills</Eyebrow>
         <Reveal>
-          <h2 className="text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
+          <h2 className="text-balance font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
             What I use
             <br className="hidden sm:block" /> to get it done.
           </h2>
@@ -82,7 +82,7 @@ export function Skills() {
                       {skill.category}
                     </span>
                   </div>
-                  <h3 className="mt-4 text-sm font-semibold text-foreground">
+                  <h3 className="mt-4 font-display text-sm font-bold text-foreground">
                     {skill.title}
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted">

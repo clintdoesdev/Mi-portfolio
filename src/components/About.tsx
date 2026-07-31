@@ -12,7 +12,7 @@ export function About() {
         <div>
           <Eyebrow>About</Eyebrow>
           <Reveal>
-            <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
+            <h2 className="text-balance font-display text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
               {approach.heading.split("\n").map((line) => (
                 <span key={line} className="block">
                   {line}

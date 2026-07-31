@@ -1,3 +1,4 @@
+import { Shape } from "@/components/ui/FloatingShapes";
 import { site } from "@/lib/data";
 
 const socials = [
@@ -36,28 +37,98 @@ const socials = [
   },
 ];
 
+const tickerItems = [
+  "Available for new projects",
+  site.email,
+  "Let's build something great",
+  "Remote · Africa & diaspora",
+];
+
 export function Footer() {
   return (
-    <footer className="border-t border-border">
-      <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-6 py-10 sm:flex-row sm:justify-between">
-        <p className="text-sm text-muted">
+    <footer className="relative overflow-hidden pt-20">
+      <div className="divider-fade absolute inset-x-0 top-0" />
+
+      <div className="relative">
+        <div aria-hidden className="pointer-events-none absolute inset-0 hidden sm:block">
+          <Shape
+            variant="star"
+            from="245,212,14"
+            to="230,160,10"
+            size={44}
+            style={{ top: "10%", left: "6%" }}
+            duration={7}
+            rotate={-8}
+          />
+          <Shape
+            variant="sphere"
+            from="232,121,249"
+            to="180,90,220"
+            size={38}
+            style={{ top: "18%", right: "10%" }}
+            duration={8}
+            delay={0.4}
+          />
+          <Shape
+            variant="cube"
+            from="52,211,153"
+            to="20,170,120"
+            size={34}
+            style={{ bottom: "22%", left: "14%" }}
+            duration={6.5}
+            delay={0.2}
+            rotate={10}
+          />
+        </div>
+
+        <div className="relative mx-auto max-w-6xl px-6 pb-10 text-center">
+          <p className="font-display text-5xl font-extrabold tracking-tight text-gradient sm:text-6xl md:text-7xl">
+            {site.name}.
+          </p>
+          <p className="mt-3 text-sm text-muted">
+            {site.role} — building clean, fast, and shipped-with-care products.
+          </p>
+
+          <div className="mt-8 flex items-center justify-center gap-3">
+            {socials.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={social.label}
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted transition-all duration-300 hover:-translate-y-1 hover:rotate-6 hover:border-accent hover:bg-accent hover:text-accent-ink hover:shadow-[0_10px_24px_-8px_rgba(245,212,14,0.4)]"
+              >
+                {social.icon}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="relative overflow-hidden border-y border-border bg-surface/50 py-3">
+        <div className="flex w-max animate-marquee-text gap-8 motion-reduce:animate-none">
+          {[...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems].map(
+            (item, i) => (
+              <span
+                key={i}
+                className="flex shrink-0 items-center gap-8 whitespace-nowrap text-sm font-medium uppercase tracking-[0.15em] text-muted"
+              >
+                {item}
+                <span aria-hidden className="text-accent">
+                  ✦
+                </span>
+              </span>
+            )
+          )}
+        </div>
+      </div>
+
+      <div className="relative mx-auto flex max-w-6xl flex-col items-center gap-3 px-6 py-6 text-center sm:flex-row sm:justify-between sm:text-left">
+        <p className="text-xs text-muted">
           © {new Date().getFullYear()} {site.name} · {site.role}
         </p>
-
-        <div className="flex items-center gap-3">
-          {socials.map((social) => (
-            <a
-              key={social.label}
-              href={social.href}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={social.label}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-muted transition-all hover:-translate-y-0.5 hover:border-accent/50 hover:text-accent"
-            >
-              {social.icon}
-            </a>
-          ))}
-        </div>
+        <p className="text-xs text-muted">Designed &amp; built by {site.name}</p>
       </div>
     </footer>
   );

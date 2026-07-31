@@ -24,18 +24,31 @@
   --color-accent-2: var(--accent-2);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-jakarta);
   --animate-float: float 6s ease-in-out infinite;
+  --animate-float-slow: float 9s ease-in-out infinite;
+  --animate-spin-slow: spin-slow 18s linear infinite;
   --animate-marquee: marquee 28s linear infinite;
   --animate-marquee-slow: marquee 40s linear infinite;
+  --animate-marquee-text: marquee 22s linear infinite;
 }
 
 @keyframes float {
   0%,
   100% {
-    transform: translateY(0);
+    transform: translateY(0) rotate(var(--float-rotate, 0deg));
   }
   50% {
-    transform: translateY(-14px);
+    transform: translateY(-14px) rotate(var(--float-rotate, 0deg));
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 

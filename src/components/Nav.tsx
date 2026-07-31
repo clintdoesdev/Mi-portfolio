@@ -47,30 +47,30 @@ export function Nav() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <a
           href="#top"
-          className="flex h-9 w-9 items-center justify-center rounded-full bg-accent text-sm font-bold text-accent-ink transition-transform hover:scale-105"
+          className="flex h-9 w-9 items-center justify-center rounded-full bg-accent font-display text-sm font-extrabold text-accent-ink transition-transform hover:scale-105 hover:rotate-6"
         >
           C
         </a>
 
-        <nav className="hidden items-center gap-1 md:flex">
+        <nav className="hidden items-center gap-1 rounded-full border border-border bg-surface/70 p-1.5 backdrop-blur-md md:flex">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className={`relative px-4 py-2 text-sm transition-colors ${
+              className={`relative rounded-full px-4 py-2 text-sm transition-colors ${
                 active === link.href
-                  ? "text-foreground"
+                  ? "text-accent-ink"
                   : "text-muted hover:text-foreground"
               }`}
             >
-              {link.label}
               {active === link.href && (
                 <motion.span
-                  layoutId="nav-underline"
-                  className="absolute inset-x-3 -bottom-px h-px bg-accent"
+                  layoutId="nav-pill"
+                  className="absolute inset-0 rounded-full bg-accent"
                   transition={{ type: "spring", stiffness: 400, damping: 32 }}
                 />
               )}
+              <span className="relative font-medium">{link.label}</span>
             </a>
           ))}
         </nav>

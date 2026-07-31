@@ -35,7 +35,7 @@ export function CTA() {
           </Reveal>
 
           <Reveal delay={0.08}>
-            <h2 className="text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
+            <h2 className="text-balance font-display text-4xl font-extrabold tracking-tight sm:text-5xl">
               Have an idea?
               <br /> Let&apos;s ship it.
             </h2>

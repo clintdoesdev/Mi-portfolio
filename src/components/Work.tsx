@@ -16,7 +16,7 @@ export function Work() {
       <div className="mx-auto max-w-6xl px-6">
         <Eyebrow>Selected work</Eyebrow>
         <Reveal>
-          <h2 className="text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
+          <h2 className="text-balance font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
             Featured work,
             <br className="hidden sm:block" /> real solutions.
           </h2>
@@ -54,7 +54,7 @@ export function Work() {
                     </span>
                   </div>
 
-                  <h3 className="mt-4 text-xl font-semibold text-foreground">
+                  <h3 className="mt-4 font-display text-xl font-bold text-foreground">
                     {project.title}
                   </h3>
                   <p className="text-sm text-accent/90">{project.subtitle}</p>

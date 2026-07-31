@@ -38,9 +38,9 @@ export function Nav() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "border-b border-border bg-background/80 backdrop-blur-md"
+          ? "border-b border-border bg-background/75 shadow-[0_8px_30px_-16px_rgba(0,0,0,0.6)] backdrop-blur-xl"
           : "border-b border-transparent bg-transparent"
       }`}
     >
@@ -87,7 +87,7 @@ export function Nav() {
           )}
           <a
             href="#contact"
-            className="rounded-full bg-accent px-4 py-2 text-sm font-semibold text-accent-ink transition-transform hover:scale-105"
+            className="rounded-full bg-accent px-4 py-2 text-sm font-semibold text-accent-ink transition-all hover:scale-105 hover:shadow-[0_0_24px_2px_rgba(245,212,14,0.3)]"
           >
             Get in touch
           </a>

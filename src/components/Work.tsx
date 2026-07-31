@@ -1,41 +1,20 @@
+import { Eyebrow } from "@/components/ui/Eyebrow";
+import { Glow } from "@/components/ui/Glow";
 import { Reveal } from "@/components/ui/Reveal";
+import { projectAccentColors, projectBannerStyles, projectIcons } from "@/components/ui/ProjectIcons";
 import { projects } from "@/lib/data";
 
-const bannerStyles = [
-  "from-emerald-400/25 via-emerald-400/5 to-transparent",
-  "from-fuchsia-400/25 via-violet-400/10 to-transparent",
-];
-
-const bannerIcons = [
-  <svg key="finance" viewBox="0 0 24 24" fill="none" className="h-8 w-8">
-    <path
-      d="M4 19V13M10 19V9M16 19V5M4 13l6-6 4 3 6-6"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>,
-  <svg key="web3" viewBox="0 0 24 24" fill="none" className="h-8 w-8">
-    <path
-      d="M12 3l7.5 4.33v9.34L12 21l-7.5-4.33V7.33L12 3z"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M12 21v-8.5M4.5 7.33L12 12.5l7.5-5.17"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      strokeLinejoin="round"
-    />
-  </svg>,
-];
+function slugify(title: string) {
+  return title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
 
 export function Work() {
   return (
-    <section id="work" className="py-24 md:py-32">
+    <section id="work" className="relative overflow-hidden py-24 md:py-32">
+      <Glow className="right-0 top-0 -translate-y-1/3" color={projectAccentColors[1]} opacity={0.1} />
+
       <div className="mx-auto max-w-6xl px-6">
+        <Eyebrow>Selected work</Eyebrow>
         <Reveal>
           <h2 className="text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
             Featured work,
@@ -49,11 +28,15 @@ export function Work() {
         <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-2">
           {projects.map((project, i) => (
             <Reveal key={project.title} delay={i * 0.1}>
-              <article className="group h-full overflow-hidden rounded-3xl border border-border bg-surface transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/40">
+              <article
+                id={`work-${slugify(project.title)}`}
+                className="group relative h-full scroll-mt-24 overflow-hidden rounded-3xl border border-border bg-surface transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/40 hover:shadow-[0_24px_60px_-24px_rgba(0,0,0,0.6)]"
+              >
                 <div
-                  className={`flex h-40 items-center justify-center bg-gradient-to-br text-foreground/80 transition-transform duration-500 group-hover:scale-[1.03] ${bannerStyles[i % bannerStyles.length]}`}
+                  className={`relative flex h-40 items-center justify-center overflow-hidden bg-gradient-to-br text-foreground/80 transition-transform duration-500 group-hover:scale-[1.03] ${projectBannerStyles[i % projectBannerStyles.length]}`}
                 >
-                  {bannerIcons[i % bannerIcons.length]}
+                  <div className="absolute inset-0 bg-dot-grid opacity-20" />
+                  <div className="relative h-8 w-8">{projectIcons[i % projectIcons.length]}</div>
                 </div>
 
                 <div className="p-6 sm:p-8">

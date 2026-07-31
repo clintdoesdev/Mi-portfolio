@@ -12,6 +12,8 @@ import type { MouseEvent } from "react";
 import heroPhoto from "../../public/images/clinton-hero.png";
 import { Reveal } from "@/components/ui/Reveal";
 import { MagneticButton } from "@/components/ui/MagneticButton";
+import { Glow } from "@/components/ui/Glow";
+import { WorkMarquee } from "@/components/WorkMarquee";
 import { heroBio, heroCardTags, heroTags, site } from "@/lib/data";
 
 export function Hero() {
@@ -42,7 +44,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28"
+      className="relative overflow-hidden pt-32 pb-14 md:pt-40 md:pb-20"
     >
       <div
         aria-hidden
@@ -52,8 +54,9 @@ export function Hero() {
             "radial-gradient(60% 50% at 50% 0%, rgba(245,212,14,0.10), transparent 70%)",
         }}
       />
+      <Glow className="-left-24 bottom-0 -z-10" color="255,138,61" opacity={0.08} size={420} />
 
-      <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 px-6 md:grid-cols-[1.1fr_0.9fr] md:gap-8">
+      <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 px-6 pb-20 md:grid-cols-[1.1fr_0.9fr] md:gap-8 md:pb-28">
         <div>
           <Reveal>
             <div className="mb-6 flex flex-wrap gap-2">
@@ -173,6 +176,8 @@ export function Hero() {
           </div>
         </Reveal>
       </div>
+
+      <WorkMarquee />
     </section>
   );
 }

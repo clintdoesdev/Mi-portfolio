@@ -1,30 +1,42 @@
+import { Eyebrow } from "@/components/ui/Eyebrow";
+import { Glow } from "@/components/ui/Glow";
 import { Marquee } from "@/components/ui/Marquee";
 import { Reveal } from "@/components/ui/Reveal";
 import { alsoFamiliar, services, skills, type SkillCategory } from "@/lib/data";
 
-const categoryStyles: Record<SkillCategory, { badge: string; glow: string }> = {
+const categoryStyles: Record<
+  SkillCategory,
+  { badge: string; bar: string; ring: string }
+> = {
   core: {
     badge: "bg-accent/10 text-accent",
-    glow: "group-hover:shadow-[0_0_0_1px_rgba(245,212,14,0.4)]",
+    bar: "bg-accent",
+    ring: "group-hover:shadow-[0_0_0_1px_rgba(245,212,14,0.4)]",
   },
   backend: {
     badge: "bg-sky-400/10 text-sky-300",
-    glow: "group-hover:shadow-[0_0_0_1px_rgba(56,189,248,0.35)]",
+    bar: "bg-sky-400",
+    ring: "group-hover:shadow-[0_0_0_1px_rgba(56,189,248,0.35)]",
   },
   design: {
     badge: "bg-fuchsia-400/10 text-fuchsia-300",
-    glow: "group-hover:shadow-[0_0_0_1px_rgba(232,121,249,0.35)]",
+    bar: "bg-fuchsia-400",
+    ring: "group-hover:shadow-[0_0_0_1px_rgba(232,121,249,0.35)]",
   },
   specialist: {
     badge: "bg-emerald-400/10 text-emerald-300",
-    glow: "group-hover:shadow-[0_0_0_1px_rgba(52,211,153,0.35)]",
+    bar: "bg-emerald-400",
+    ring: "group-hover:shadow-[0_0_0_1px_rgba(52,211,153,0.35)]",
   },
 };
 
 export function Skills() {
   return (
-    <section id="skills" className="py-24 md:py-32">
+    <section id="skills" className="relative overflow-hidden py-24 md:py-32">
+      <Glow className="right-1/4 top-10" color="232,121,249" opacity={0.07} />
+
       <div className="mx-auto max-w-6xl px-6">
+        <Eyebrow>Skills</Eyebrow>
         <Reveal>
           <h2 className="text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
             What I use
@@ -55,11 +67,14 @@ export function Skills() {
             return (
               <Reveal key={skill.title} delay={(i % 4) * 0.06}>
                 <div
-                  className={`group relative h-full rounded-2xl border border-border bg-surface p-5 transition-all duration-300 hover:-translate-y-1 ${style.glow}`}
+                  className={`group relative h-full overflow-hidden rounded-2xl border border-border bg-surface p-5 pt-6 transition-all duration-300 hover:-translate-y-1.5 hover:bg-surface-2 ${style.ring}`}
                 >
+                  <span
+                    className={`absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100 ${style.bar}`}
+                  />
                   <div className="flex items-center justify-between">
                     <span
-                      className={`flex h-9 w-9 items-center justify-center rounded-lg text-xs font-bold ${style.badge}`}
+                      className={`flex h-10 w-10 items-center justify-center rounded-xl text-xs font-bold transition-transform duration-300 group-hover:scale-110 ${style.badge}`}
                     >
                       {skill.abbr}
                     </span>

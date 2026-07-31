@@ -1,19 +1,26 @@
+import { Eyebrow } from "@/components/ui/Eyebrow";
+import { Glow } from "@/components/ui/Glow";
 import { Reveal } from "@/components/ui/Reveal";
 import { approach, tiktokBlurb } from "@/lib/data";
 
 export function About() {
   return (
-    <section id="about" className="py-24 md:py-32">
+    <section id="about" className="relative overflow-hidden py-24 md:py-32">
+      <Glow className="left-1/2 top-0 -translate-x-1/2 -translate-y-1/2" color="56,189,248" opacity={0.08} />
+
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-6 md:grid-cols-[0.9fr_1.1fr] md:gap-16">
-        <Reveal>
-          <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
-            {approach.heading.split("\n").map((line) => (
-              <span key={line} className="block">
-                {line}
-              </span>
-            ))}
-          </h2>
-        </Reveal>
+        <div>
+          <Eyebrow>About</Eyebrow>
+          <Reveal>
+            <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
+              {approach.heading.split("\n").map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
+            </h2>
+          </Reveal>
+        </div>
 
         <div className="space-y-6">
           {approach.paragraphs.map((paragraph, i) => (
@@ -46,7 +53,7 @@ export function About() {
               href={tiktokBlurb.href}
               target="_blank"
               rel="noreferrer"
-              className="group mt-4 flex items-start gap-4 rounded-2xl border border-border bg-surface p-5 transition-colors hover:border-accent/50"
+              className="group mt-4 flex items-start gap-4 rounded-2xl border border-border bg-surface p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/50 hover:shadow-[0_16px_40px_-20px_rgba(245,212,14,0.35)]"
             >
               <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent transition-transform group-hover:scale-110">
                 <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">

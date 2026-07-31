@@ -1,5 +1,6 @@
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Glow } from "@/components/ui/Glow";
+import { Shape } from "@/components/ui/FloatingShapes";
 import { Reveal } from "@/components/ui/Reveal";
 import { projectAccentColors, projectBannerStyles, projectIcons } from "@/components/ui/ProjectIcons";
 import { projects } from "@/lib/data";
@@ -12,6 +13,17 @@ export function Work() {
   return (
     <section id="work" className="relative overflow-hidden py-24 md:py-32">
       <Glow className="right-0 top-0 -translate-y-1/3" color={projectAccentColors[1]} opacity={0.1} />
+      <div aria-hidden className="pointer-events-none absolute inset-0 hidden sm:block">
+        <Shape
+          variant="pyramid"
+          from="255,138,61"
+          to="245,140,20"
+          size={40}
+          style={{ top: "10%", left: "6%" }}
+          duration={7.5}
+          rotate={-6}
+        />
+      </div>
 
       <div className="mx-auto max-w-6xl px-6">
         <Eyebrow>Selected work</Eyebrow>

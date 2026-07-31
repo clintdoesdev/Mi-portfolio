@@ -1,5 +1,6 @@
 import { Counter } from "@/components/ui/Counter";
 import { Reveal } from "@/components/ui/Reveal";
+import { Shape } from "@/components/ui/FloatingShapes";
 import { stats } from "@/lib/data";
 
 const icons = [
@@ -43,14 +44,28 @@ const icons = [
 
 export function Stats() {
   return (
-    <section className="relative border-y border-border bg-dot-grid bg-surface/30">
+    <section className="relative overflow-hidden border-y border-border bg-dot-grid bg-surface/30">
       <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-transparent to-background/60" />
+      <div aria-hidden className="pointer-events-none absolute inset-0 hidden sm:block">
+        <Shape
+          variant="pill"
+          from="245,212,14"
+          to="230,160,10"
+          size={26}
+          style={{ top: "18%", right: "6%" }}
+          duration={7}
+          rotate={-14}
+        />
+      </div>
 
       <div className="relative mx-auto max-w-6xl px-6 py-16 md:py-20">
         <div className="grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-border bg-border md:grid-cols-4">
           {stats.map((stat, i) => (
             <Reveal key={stat.label} delay={i * 0.08} className="h-full">
-              <div className="group flex h-full flex-col gap-4 bg-surface p-6 transition-colors hover:bg-surface-2 sm:p-8">
+              <div className="group relative flex h-full flex-col gap-4 bg-surface p-6 transition-colors hover:bg-surface-2 sm:p-8">
+                <span className="absolute right-5 top-5 font-display text-xs font-bold text-border transition-colors group-hover:text-accent/60 sm:right-6 sm:top-6">
+                  0{i + 1}
+                </span>
                 <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent transition-transform duration-300 group-hover:scale-110">
                   {icons[i % icons.length]}
                 </span>

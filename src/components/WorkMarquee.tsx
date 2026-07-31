@@ -1,5 +1,8 @@
+"use client";
+
 import { projectAccentColors, projectIcons } from "@/components/ui/ProjectIcons";
 import { projects } from "@/lib/data";
+import { smoothScrollToHash } from "@/lib/scroll";
 
 function slugify(title: string) {
   return title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
@@ -23,6 +26,10 @@ export function WorkMarquee() {
             <a
               key={`${project.title}-${i}`}
               href={`#work-${slugify(project.title)}`}
+              onClick={(e) => {
+                e.preventDefault();
+                smoothScrollToHash(`#work-${slugify(project.title)}`);
+              }}
               className="group flex shrink-0 items-center gap-3 rounded-2xl border border-border bg-surface/70 px-5 py-3.5 transition-colors hover:border-accent/40 hover:bg-surface"
             >
               <span

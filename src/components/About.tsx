@@ -1,5 +1,6 @@
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Glow } from "@/components/ui/Glow";
+import { Shape } from "@/components/ui/FloatingShapes";
 import { Reveal } from "@/components/ui/Reveal";
 import { approach, tiktokBlurb } from "@/lib/data";
 
@@ -7,6 +8,17 @@ export function About() {
   return (
     <section id="about" className="relative overflow-hidden py-24 md:py-32">
       <Glow className="left-1/2 top-0 -translate-x-1/2 -translate-y-1/2" color="56,189,248" opacity={0.08} />
+      <div aria-hidden className="pointer-events-none absolute inset-0 hidden sm:block">
+        <Shape
+          variant="star"
+          from="56,189,248"
+          to="20,130,190"
+          size={30}
+          style={{ top: "8%", left: "44%" }}
+          duration={7.5}
+          rotate={10}
+        />
+      </div>
 
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-6 md:grid-cols-[0.9fr_1.1fr] md:gap-16">
         <div>
@@ -32,17 +44,22 @@ export function About() {
           ))}
 
           <Reveal delay={0.2}>
-            <ul className="flex flex-wrap gap-x-2 gap-y-3 pt-2">
-              {approach.promise.map((item, i) => (
-                <li key={item} className="flex items-center gap-2">
-                  <span className="rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground">
-                    {item}
-                  </span>
-                  {i < approach.promise.length - 1 && (
-                    <span aria-hidden className="text-border">
-                      /
-                    </span>
-                  )}
+            <ul className="flex flex-wrap gap-2 pt-2">
+              {approach.promise.map((item) => (
+                <li
+                  key={item}
+                  className="flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground"
+                >
+                  <svg viewBox="0 0 20 20" fill="none" className="h-3.5 w-3.5 text-accent">
+                    <path
+                      d="M4 10.5l3.5 3.5L16 6"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  {item}
                 </li>
               ))}
             </ul>

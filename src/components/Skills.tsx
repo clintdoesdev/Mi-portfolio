@@ -1,5 +1,6 @@
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Glow } from "@/components/ui/Glow";
+import { Shape } from "@/components/ui/FloatingShapes";
 import { Marquee } from "@/components/ui/Marquee";
 import { Reveal } from "@/components/ui/Reveal";
 import { alsoFamiliar, services, skills, type SkillCategory } from "@/lib/data";
@@ -34,6 +35,17 @@ export function Skills() {
   return (
     <section id="skills" className="relative overflow-hidden py-24 md:py-32">
       <Glow className="right-1/4 top-10" color="232,121,249" opacity={0.07} />
+      <div aria-hidden className="pointer-events-none absolute inset-0 hidden sm:block">
+        <Shape
+          variant="cube"
+          from="52,211,153"
+          to="20,170,120"
+          size={30}
+          style={{ top: "4%", right: "10%" }}
+          duration={7}
+          rotate={12}
+        />
+      </div>
 
       <div className="mx-auto max-w-6xl px-6">
         <Eyebrow>Skills</Eyebrow>

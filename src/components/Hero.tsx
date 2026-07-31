@@ -10,6 +10,7 @@ import { Glow } from "@/components/ui/Glow";
 import { FloatingShapes } from "@/components/ui/FloatingShapes";
 import { WorkMarquee } from "@/components/WorkMarquee";
 import { heroCardTags, heroTags, site } from "@/lib/data";
+import { smoothScrollToHash } from "@/lib/scroll";
 
 const avatarColors = ["245,212,14", "56,189,248", "232,121,249"];
 
@@ -49,12 +50,21 @@ export function Hero() {
         <FloatingShapes />
 
         <div className="relative mx-auto max-w-4xl px-6 text-center">
-          <span
+          <div
             aria-hidden
-            className="pointer-events-none absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 select-none whitespace-nowrap font-display text-[26vw] font-extrabold leading-none tracking-tight text-white/[0.035] sm:text-[20vw] md:text-[16vw]"
+            className="pointer-events-none absolute inset-x-0 top-1/2 -z-10 -translate-y-1/2 overflow-hidden"
           >
-            CLINTON
-          </span>
+            <div className="flex w-max animate-marquee-slow motion-reduce:animate-none">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <span
+                  key={i}
+                  className="select-none whitespace-nowrap px-8 font-display text-[26vw] font-extrabold leading-none tracking-tight text-white/[0.035] sm:text-[20vw] md:text-[16vw]"
+                >
+                  CLINTON
+                </span>
+              ))}
+            </div>
+          </div>
 
           <Reveal>
             <div className="flex flex-wrap items-center justify-center gap-2">
@@ -161,6 +171,10 @@ export function Hero() {
               </MagneticButton>
               <a
                 href="#work"
+                onClick={(e) => {
+                  e.preventDefault();
+                  smoothScrollToHash("#work");
+                }}
                 className="text-sm font-medium text-muted underline decoration-border underline-offset-4 transition-colors hover:text-foreground hover:decoration-accent"
               >
                 See my work ↓

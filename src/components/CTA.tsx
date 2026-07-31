@@ -1,4 +1,5 @@
 import { Glow } from "@/components/ui/Glow";
+import { Shape } from "@/components/ui/FloatingShapes";
 import { Reveal } from "@/components/ui/Reveal";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { site } from "@/lib/data";
@@ -19,6 +20,26 @@ export function CTA() {
         opacity={0.08}
         size={420}
       />
+      <div aria-hidden className="pointer-events-none absolute inset-0 hidden sm:block">
+        <Shape
+          variant="star"
+          from="216,180,254"
+          to="168,120,230"
+          size={34}
+          style={{ top: "12%", right: "16%" }}
+          duration={7}
+          rotate={-10}
+        />
+        <Shape
+          variant="sphere"
+          from="245,212,14"
+          to="230,160,10"
+          size={28}
+          style={{ bottom: "14%", left: "12%" }}
+          duration={8}
+          delay={0.3}
+        />
+      </div>
 
       <div className="mx-auto max-w-3xl px-6">
         <div className="relative rounded-[2.5rem] border border-border bg-surface/40 px-6 py-16 text-center backdrop-blur-sm sm:px-12 sm:py-20">

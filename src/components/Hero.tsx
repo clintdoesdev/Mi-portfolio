@@ -1,89 +1,81 @@
-"use client";
-
-import { motion } from "framer-motion";
 import Image from "next/image";
-import { useRef } from "react";
-import type { ReactNode } from "react";
+import type { CSSProperties } from "react";
 import heroPhoto from "../../public/images/clinton-photo.jpg";
-import { PhysicsPills } from "@/components/PhysicsPills";
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { Keyboard } from "@/components/Keyboard";
 import { site } from "@/lib/data";
 
-const ease = [0.16, 1, 0.3, 1] as const;
-
-// Each headline line rises out of its own mask; the clip opens past the line box
-// once revealed so the toggle's focus ring is never cut off.
-function Line({ children, delay, className = "" }: { children: ReactNode; delay: number; className?: string }) {
+// Splits a line into letters that drop in one after another (see `.char` in globals.css).
+function Letters({ text, from }: { text: string; from: number }) {
   return (
-    <motion.span
-      className={`block ${className}`}
-      initial={{ y: "60%", clipPath: "inset(100% 0% 0% 0%)" }}
-      animate={{ y: "0%", clipPath: "inset(-40% -10% -40% -10%)" }}
-      transition={{ duration: 0.9, delay, ease }}
-    >
-      {children}
-    </motion.span>
+    <>
+      {text.split("").map((char, i) => (
+        <span
+          key={i}
+          className="char"
+          style={{ "--i": from + i, "--r": `${(i % 2 ? 1 : -1) * (6 + ((i * 7) % 9))}deg` } as CSSProperties}
+        >
+          {char === " " ? " " : char}
+        </span>
+      ))}
+    </>
   );
 }
 
 export function Hero() {
-  const copyRef = useRef<HTMLDivElement>(null);
-
   return (
-    <section
-      id="top"
-      className="relative isolate flex min-h-[max(100svh,700px)] flex-col overflow-hidden md:min-h-[max(100svh,820px)]"
-    >
-      <div
-        ref={copyRef}
-        className="relative z-10 mx-auto w-full max-w-6xl px-4 pt-28 text-center sm:pt-32 lg:pt-36"
-      >
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease }}
-          className="flex items-center justify-center gap-2.5 text-lg text-muted sm:text-2xl"
-        >
-          Hi, I&apos;m
-          <span className="relative inline-flex h-9 w-9 overflow-hidden rounded-full bg-brand ring-2 ring-surface sm:h-11 sm:w-11">
+    <section id="top" className="relative isolate overflow-hidden pb-16 pt-28 sm:pt-32 lg:pb-24 lg:pt-32">
+      <div aria-hidden className="dot-grid pointer-events-none absolute inset-0 -z-10" />
+
+      <div className="mx-auto max-w-6xl px-4 text-center sm:px-6">
+        <div className="fade-up inline-flex items-end gap-2.5">
+          <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full bg-accent ring-4 ring-surface sm:h-12 sm:w-12">
             <Image
               src={heroPhoto}
               alt=""
               priority
-              sizes="44px"
+              sizes="48px"
               className="h-full w-full scale-[1.35] object-cover object-[50%_40%]"
             />
           </span>
-          <span className="text-foreground">{site.name}</span>
-        </motion.p>
-
-        <h1 className="mt-3 font-display text-[clamp(2.4rem,13.4vw,7.75rem)] font-black uppercase leading-[0.86] tracking-[-0.04em] sm:mt-4">
-          <span className="sr-only">{site.role}</span>
-          <span aria-hidden>
-            <Line delay={0.1}>Full-stack</Line>
-            <Line delay={0.18} className="text-accent">
-              &amp; Web3
-            </Line>
+          <span className="shadow-soft relative mb-3 rounded-2xl rounded-bl-sm border border-border bg-surface px-4 py-2 text-base font-medium sm:text-lg">
+            Hi, I&apos;m {site.name}!{" "}
+            <span className="inline-block origin-[70%_70%] animate-wave motion-reduce:animate-none">👋</span>
           </span>
-          <Line delay={0.26}>
-            <span aria-hidden>Devel</span>
-            <ThemeToggle className="mx-[0.03em]" />
-            <span aria-hidden>per</span>
-          </Line>
+        </div>
+
+        <h1 className="mt-5 font-display text-[clamp(3rem,15vw,8rem)] font-extrabold uppercase leading-[0.86] tracking-[-0.01em] [font-stretch:86%] sm:mt-6">
+          <span className="sr-only">{site.role}</span>
+          <span aria-hidden className="block">
+            <Letters text="Full-stack" from={0} />
+          </span>
+          <span aria-hidden className="block py-[0.04em]">
+            <span className="marker px-[0.08em]">
+              <Letters text="& Web3" from={10} />
+            </span>
+          </span>
+          <span aria-hidden className="block">
+            <Letters text="Developer" from={16} />
+            <span
+              className="char ml-[0.05em] h-[0.68em] w-[0.1em] align-baseline"
+              style={{ "--i": 25 } as CSSProperties}
+            >
+              <span className="block h-full w-full animate-caret rounded-[0.02em] bg-accent shadow-[0_0_0_0.025em_var(--foreground)]" />
+            </span>
+          </span>
         </h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.4, ease }}
-          className="mx-auto mt-5 max-w-[22rem] text-balance text-base leading-snug text-muted sm:mt-7 sm:max-w-xl sm:text-xl"
+        <p
+          className="fade-up mx-auto mt-6 max-w-[22rem] text-balance text-base leading-snug text-muted sm:mt-8 sm:max-w-xl sm:text-xl"
+          style={{ animationDelay: "0.9s" }}
         >
           I build <strong className="font-semibold text-foreground">websites and digital products</strong> end
           to end — <strong className="font-semibold text-foreground">products that ship fast</strong>.
-        </motion.p>
-      </div>
+        </p>
 
-      <PhysicsPills copyRef={copyRef} />
+        <div className="mt-12 sm:mt-14">
+          <Keyboard />
+        </div>
+      </div>
     </section>
   );
 }

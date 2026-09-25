@@ -2,10 +2,6 @@ import type { ProjectMockup } from "@/lib/data";
 
 const uiFont = { fontFamily: "var(--font-inter), system-ui, sans-serif" };
 
-function Gobo() {
-  return <div aria-hidden className="gobo pointer-events-none absolute -inset-10 opacity-70" />;
-}
-
 function SpendifyScreen() {
   const bars = [46, 62, 38, 70, 55, 82, 64, 90, 58, 76, 68, 96];
   return (
@@ -169,28 +165,34 @@ function MagnusScreen() {
   );
 }
 
+function Laptop({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="w-full">
+      <div className="rounded-t-[0.6rem] bg-[#1c1c1f] p-[1.4%] shadow-[0_30px_40px_-24px_rgba(0,0,0,0.55)]">
+        <div className="aspect-[16/10] overflow-hidden rounded-[0.2rem]">{children}</div>
+      </div>
+      <div className="relative -mx-[6%] h-[0.55rem] rounded-b-[0.7rem] bg-gradient-to-b from-[#e8e8ec] to-[#a1a1a8] shadow-[0_14px_18px_-8px_rgba(0,0,0,0.45)]">
+        <div className="mx-auto h-[45%] w-[15%] rounded-b-md bg-[#8e8e95]" />
+      </div>
+    </div>
+  );
+}
+
 function DashboardScene() {
   return (
-    <div className="absolute inset-0 bg-gradient-to-b from-[#ddd6cb] to-[#c9c0b3]">
-      <Gobo />
-      <div className="absolute inset-x-0 bottom-0 h-[24%] bg-gradient-to-b from-[#6f4e37] to-[#4a3223] shadow-[inset_0_2px_0_rgba(255,255,255,0.18)]" />
-      <div className="absolute bottom-[24%] left-[7%] w-[11%]">
-        <div className="relative mx-auto h-0 w-full pb-[120%]">
-          <span className="absolute bottom-[55%] left-[10%] h-[60%] w-[34%] -rotate-[28deg] rounded-[50%_50%_50%_50%/60%_60%_40%_40%] bg-[#5f8f4e]" />
-          <span className="absolute bottom-[58%] left-[38%] h-[70%] w-[30%] rounded-[50%] bg-[#6fa35b]" />
-          <span className="absolute bottom-[55%] right-[6%] h-[58%] w-[34%] rotate-[28deg] rounded-[50%_50%_50%_50%/60%_60%_40%_40%] bg-[#557f45]" />
-          <span className="absolute bottom-0 left-[12%] h-[58%] w-[76%] rounded-b-[40%] rounded-t-md bg-gradient-to-b from-[#d49a74] to-[#b87554]" />
-        </div>
+    <div className="absolute inset-0 overflow-hidden bg-[linear-gradient(150deg,#e6f7ec_0%,#bde8cb_100%)]">
+      <div className="absolute inset-0 bg-[radial-gradient(rgba(21,128,61,0.2)_1.2px,transparent_1.2px)] [background-size:18px_18px]" />
+      <div className="absolute -right-[12%] -top-[25%] aspect-square w-[60%] rounded-full bg-white/50 blur-2xl" />
+      <div className="absolute left-1/2 top-1/2 w-[74%] -translate-x-1/2 -translate-y-[44%] transition-transform duration-700 group-hover:-translate-y-[47%]">
+        <Laptop>
+          <SpendifyScreen />
+        </Laptop>
       </div>
-      <div className="absolute bottom-[21%] left-1/2 w-[66%] -translate-x-[42%] transition-transform duration-700 group-hover:-translate-y-1">
-        <div className="rounded-t-[0.6rem] bg-[#1c1c1f] p-[1.4%] shadow-[0_30px_40px_-24px_rgba(0,0,0,0.6)]">
-          <div className="aspect-[16/10] overflow-hidden rounded-[0.2rem]">
-            <SpendifyScreen />
-          </div>
-        </div>
-        <div className="relative -mx-[6%] h-[0.55rem] rounded-b-[0.7rem] bg-gradient-to-b from-[#e2e2e6] to-[#a1a1a8] shadow-[0_12px_18px_-8px_rgba(0,0,0,0.5)]">
-          <div className="mx-auto h-[45%] w-[15%] rounded-b-md bg-[#8e8e95]" />
-        </div>
+      <div className="animate-bob absolute left-[5%] top-[9%] rounded-2xl bg-white px-3 py-2 shadow-[0_14px_30px_-12px_rgba(21,128,61,0.45)] sm:left-[7%] sm:top-[11%]">
+        <p className="text-[9px] font-medium text-neutral-500 sm:text-[11px]">Savings goal</p>
+        <p className="font-display text-sm font-bold text-neutral-900 sm:text-lg">
+          $2,050 <span className="text-[10px] text-green-600 sm:text-xs">+8%</span>
+        </p>
       </div>
     </div>
   );
@@ -198,50 +200,29 @@ function DashboardScene() {
 
 function MarketplaceScene() {
   return (
-    <div className="absolute inset-0 bg-gradient-to-b from-[#d4cfdb] to-[#bfb8ca]">
-      <Gobo />
-      <div className="absolute bottom-[10%] left-1/2 h-[16%] w-[58%] -translate-x-1/2 rounded-t-[999px] bg-gradient-to-b from-[#b7825a] to-[#8a5a39] shadow-[inset_0_3px_0_rgba(255,255,255,0.25)]" />
-      <div className="absolute inset-x-0 bottom-0 h-[11%] bg-gradient-to-b from-[#a89fb4] to-[#968ca3]" />
-      <div className="absolute bottom-[19%] left-1/2 w-[27%] -translate-x-1/2 transition-transform duration-700 group-hover:-translate-y-1.5">
-        <div className="rounded-[1.4rem] bg-[#111014] p-[4%] shadow-[0_30px_40px_-20px_rgba(0,0,0,0.6),inset_0_0_0_1px_rgba(255,255,255,0.08)] sm:rounded-[1.8rem]">
+    <div className="absolute inset-0 overflow-hidden bg-[radial-gradient(120%_90%_at_75%_0%,#43307a_0%,#1a1330_55%,#0f0b1c_100%)]">
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:28px_28px]" />
+      <div className="absolute -left-[10%] bottom-[-20%] aspect-square w-[55%] rounded-full bg-fuchsia-500/30 blur-3xl" />
+      <div className="absolute right-[5%] top-[-10%] aspect-square w-[40%] rounded-full bg-violet-500/30 blur-3xl" />
+      <div className="absolute left-1/2 top-1/2 w-[30%] -translate-x-1/2 -translate-y-1/2 -rotate-[8deg] transition-transform duration-700 group-hover:-rotate-[4deg]">
+        <div className="rounded-[1.4rem] bg-[#111014] p-[4%] shadow-[0_40px_60px_-20px_rgba(0,0,0,0.8),inset_0_0_0_1px_rgba(255,255,255,0.1)] sm:rounded-[1.8rem]">
           <div className="relative aspect-[280/600] overflow-hidden rounded-[1.05rem] sm:rounded-[1.4rem]">
             <MagnusScreen />
             <span className="absolute left-1/2 top-[1.6%] h-[3.2%] w-[32%] -translate-x-1/2 rounded-full bg-black" />
           </div>
         </div>
       </div>
-    </div>
-  );
-}
-
-export function ComingSoonScene() {
-  return (
-    <div className="absolute inset-0 bg-gradient-to-b from-[#e7d8cd] to-[#d5c1b3]">
-      <Gobo />
-      <div className="absolute inset-x-0 bottom-0 h-[16%] bg-gradient-to-b from-[#c9ae9c] to-[#b89a86]" />
-      <div className="absolute bottom-[12%] left-1/2 w-[46%] -translate-x-1/2 sm:w-[34%]">
-        <div className="rounded-[0.7rem] bg-[#f1ece8] p-[2%] shadow-[0_30px_40px_-24px_rgba(0,0,0,0.5)]">
-          <div className="aspect-[16/10] overflow-hidden rounded-[0.35rem] bg-white blur-[1.5px]">
-            <div className="flex h-full">
-              <div className="w-[18%] space-y-[6%] bg-[#faf7f5] p-[3%]">
-                {[0, 1, 2, 3].map((i) => (
-                  <div key={i} className="h-[6%] min-h-1 rounded-full bg-[#e5ddd7]" />
-                ))}
-              </div>
-              <div className="flex-1 space-y-[4%] p-[4%]">
-                <div className="h-[8%] w-1/2 rounded bg-[#e5ddd7]" />
-                <div className="grid h-[30%] grid-cols-3 gap-[4%]">
-                  <div className="rounded bg-[#f3eee9]" />
-                  <div className="rounded bg-[#f3eee9]" />
-                  <div className="rounded bg-[#ff5a1f]/70" />
-                </div>
-                <div className="h-[40%] rounded bg-[#f3eee9]" />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="mx-auto h-[1.6rem] w-[14%] bg-gradient-to-b from-[#ddd5cf] to-[#c7bdb5]" />
-        <div className="mx-auto h-[0.35rem] w-[34%] rounded-full bg-[#cfc5bd]" />
+      <div className="animate-bob absolute right-[6%] top-[14%] flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[10px] font-semibold text-white backdrop-blur-md sm:text-xs">
+        <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+        Wallet connected
+      </div>
+      <div
+        className="animate-bob absolute bottom-[12%] left-[6%] w-[24%] rotate-[-6deg] rounded-xl border border-white/10 bg-[#16131f] p-1.5 shadow-2xl sm:left-[9%]"
+        style={{ animationDelay: "-2s" }}
+      >
+        <div className="aspect-square rounded-lg bg-gradient-to-br from-violet-500 to-pink-500" />
+        <p className="mt-1.5 truncate text-[8px] font-bold text-white sm:text-[10px]">Solidity Audit</p>
+        <p className="text-[8px] font-bold text-violet-300 sm:text-[10px]">0.12 ETH</p>
       </div>
     </div>
   );

@@ -45,87 +45,86 @@ export const services = [
   "Web3 (on request)",
 ];
 
-export type PillColor =
-  | "pink"
-  | "green"
-  | "yellow"
-  | "blue"
-  | "purple"
-  | "orange"
-  | "teal"
-  | "salmon"
-  | "lavender"
-  | "lime";
+export type KeyVariant = "alpha" | "mod" | "yellow" | "ink";
 
-export type PillIcon =
-  | "target"
-  | "plus"
-  | "hash"
-  | "globe"
-  | "pencil"
-  | "quote"
-  | "smile"
-  | "square"
-  | "star"
-  | "arrow"
-  | "check"
-  | "bolt"
-  | "code"
-  | "card"
-  | "layers"
-  | "sparkle"
-  | "cube"
-  | "chart";
+export type Keycap = {
+  /** Printed legend: a glyph for modifier keys, a small symbol for service keys. */
+  legend: string;
+  /** Service name printed on alpha keys. */
+  label?: string;
+  variant: KeyVariant;
+  /** Relative width inside its row. */
+  grow?: number;
+  /** What the little keyboard screen prints when this key is pressed. */
+  message?: string;
+  /** Real keyboard keys (KeyboardEvent.key) that press this keycap. */
+  keys?: string[];
+  hideOnMobile?: boolean;
+};
 
-// The hero pile: every service, hero tag and promise becomes a physics pill,
-// with a few icon-only "buttons" mixed in like confetti.
-export const heroPills: { label: string; color: PillColor; icon: PillIcon }[] = [
-  { label: "Landing Pages", color: "pink", icon: "target" },
-  { label: "SaaS Platforms", color: "orange", icon: "plus" },
-  { label: "Dashboards", color: "purple", icon: "chart" },
-  { label: "Marketing Sites", color: "green", icon: "sparkle" },
-  { label: "APIs & Backends", color: "blue", icon: "code" },
-  { label: "Fast delivery", color: "yellow", icon: "bolt" },
-  { label: "Client Websites", color: "salmon", icon: "globe" },
-  { label: "E-commerce", color: "teal", icon: "card" },
-  { label: "Paystack integration", color: "lavender", icon: "square" },
-  { label: "SEO-ready builds", color: "lime", icon: "hash" },
-  { label: "Web3 (on request)", color: "pink", icon: "cube" },
-  { label: "Africa-focused", color: "teal", icon: "globe" },
-  { label: "Clean code", color: "yellow", icon: "code" },
-  { label: "Smooth UX", color: "blue", icon: "smile" },
-  { label: "Fast queries", color: "orange", icon: "bolt" },
-  { label: "On-time delivery", color: "green", icon: "check" },
-];
-
-export const heroDots: { color: PillColor; icon: PillIcon }[] = [
-  { color: "yellow", icon: "pencil" },
-  { color: "orange", icon: "star" },
-  { color: "blue", icon: "arrow" },
-  { color: "purple", icon: "sparkle" },
-  { color: "pink", icon: "layers" },
-  { color: "green", icon: "smile" },
-  { color: "teal", icon: "check" },
-  { color: "blue", icon: "quote" },
-  { color: "salmon", icon: "target" },
-  { color: "lime", icon: "plus" },
-  { color: "lavender", icon: "star" },
-  { color: "yellow", icon: "hash" },
+// The hero keyboard: every service and hero tag is a keycap.
+export const keyboardRows: Keycap[][] = [
+  [
+    { legend: "esc", variant: "yellow", message: "no escape — just shipping", keys: ["Escape"] },
+    { legend: "◎", label: "Landing Pages", variant: "alpha", grow: 2 },
+    { legend: "✦", label: "Marketing Sites", variant: "alpha", grow: 2 },
+    { legend: "∞", label: "SaaS Platforms", variant: "alpha", grow: 2 },
+    { legend: "▤", label: "Dashboards", variant: "alpha", grow: 2 },
+    { legend: "⌫", variant: "mod", grow: 1.3, message: "deleting bugs…", keys: ["Backspace", "Delete"] },
+  ],
+  [
+    { legend: "⇥", variant: "mod", grow: 1.3, message: "indenting clean code", keys: ["Tab"], hideOnMobile: true },
+    { legend: "◍", label: "Client Websites", variant: "alpha", grow: 2 },
+    { legend: "⇄", label: "APIs & Backends", variant: "alpha", grow: 2 },
+    { legend: "¤", label: "E-commerce", variant: "alpha", grow: 2 },
+    { legend: "{ }", variant: "mod", message: "writing clean code", keys: ["{", "}"] },
+  ],
+  [
+    { legend: "⇧", variant: "mod", grow: 1.6, message: "shifting to production", keys: ["Shift"] },
+    { legend: "Ξ", label: "Web3 (on request)", variant: "alpha", grow: 2 },
+    { legend: "₦", label: "Paystack integration", variant: "alpha", grow: 2.2 },
+    { legend: "#", label: "SEO-ready builds", variant: "alpha", grow: 2 },
+    { legend: "↵", variant: "ink", grow: 1.5, message: "deploying… ✓ live", keys: ["Enter"] },
+  ],
+  [
+    { legend: "⌘", variant: "mod", message: "⌘ + S — saved", keys: ["Meta", "Control"] },
+    { legend: "⌥", variant: "mod", message: "exploring options", keys: ["Alt"], hideOnMobile: true },
+    {
+      legend: "»",
+      label: "Fast delivery",
+      variant: "yellow",
+      grow: 5,
+      message: "fast delivery — avg 48h response",
+      keys: [" "],
+    },
+    { legend: "✺", label: "Africa-focused", variant: "alpha", grow: 2 },
+    { legend: "$_", variant: "mod", message: "npm run ship", keys: ["$"], hideOnMobile: true },
+  ],
 ];
 
 export const skills: {
+  abbr: string;
   title: string;
   caption: string;
-  tint: "white" | "lavender" | "mint" | "cream" | "sky" | "rose";
+  from: string;
+  to: string;
+  darkText?: boolean;
 }[] = [
-  { title: "React", caption: "hooks, state & performance", tint: "white" },
-  { title: "Next.js", caption: "SSR, SSG & App Router", tint: "cream" },
-  { title: "TypeScript", caption: "safer refactors, clear contracts", tint: "sky" },
-  { title: "Node.js", caption: "APIs, jobs & middleware", tint: "mint" },
-  { title: "Databases", caption: "schemas, indexing & queries", tint: "white" },
-  { title: "Web3 & Blockchain", caption: "contracts, NFTs & wallets", tint: "lavender" },
-  { title: "UI Systems", caption: "responsive, animated, accessible", tint: "rose" },
-  { title: "Paystack & Payments", caption: "billing, webhooks, multi-country", tint: "cream" },
+  { abbr: "Re", title: "React", caption: "Hooks, state & performance", from: "#7dd3fc", to: "#0284c7" },
+  { abbr: "Nx", title: "Next.js", caption: "SSR, SSG & App Router", from: "#52525b", to: "#09090b" },
+  { abbr: "Ts", title: "TypeScript", caption: "Safer refactors, clear contracts", from: "#60a5fa", to: "#1d4ed8" },
+  { abbr: "Nd", title: "Node.js", caption: "APIs, jobs & middleware", from: "#86efac", to: "#15803d" },
+  { abbr: "Db", title: "Databases", caption: "Schemas, indexing & queries", from: "#fdba74", to: "#ea580c" },
+  { abbr: "W3", title: "Web3 & Blockchain", caption: "Contracts, NFTs & wallets", from: "#c4b5fd", to: "#6d28d9" },
+  { abbr: "Ui", title: "UI Systems", caption: "Responsive, animated, accessible", from: "#f9a8d4", to: "#be185d" },
+  {
+    abbr: "Py",
+    title: "Paystack & Payments",
+    caption: "Billing, webhooks, multi-country",
+    from: "#fde047",
+    to: "#eab308",
+    darkText: true,
+  },
 ];
 
 export const alsoFamiliar = [
@@ -228,11 +227,13 @@ export const processSteps: {
   },
 ];
 
-export const ctaWords = [
-  { word: "BUILD", color: "#34d399" },
-  { word: "SHIP", color: "#8b5cf6" },
-  { word: "MAKE", color: "#ff6a2e" },
-  { word: "LAUNCH", color: "#f472b6" },
+export const ctaWords = ["BUILD", "SHIP", "LAUNCH", "MAKE"];
+
+export const tickerItems = [
+  "Available for new projects",
+  site.email,
+  "Let's build something great",
+  "Remote · Africa & diaspora",
 ];
 
 export const navLinks = [

@@ -1,41 +1,43 @@
-import { ArrowUpRight } from "@/components/ui/SocialIcons";
-import { site } from "@/lib/data";
-
-function GetInTouchBadge() {
-  return (
-    <a
-      href={`mailto:${site.email}`}
-      aria-label={`Get in touch with ${site.name}`}
-      className="group relative flex h-24 w-24 shrink-0 items-center justify-center sm:h-28 sm:w-28"
-    >
-      <svg viewBox="0 0 100 100" aria-hidden className="animate-spin-slow absolute inset-0 h-full w-full text-foreground">
-        <defs>
-          <path id="badge-circle" d="M50 50m-38 0a38 38 0 1 1 76 0a38 38 0 1 1-76 0" />
-        </defs>
-        <text fontSize="10.5" fontWeight="600" letterSpacing="2.6" fill="currentColor">
-          <textPath href="#badge-circle">GET IN TOUCH • GET IN TOUCH •</textPath>
-        </text>
-      </svg>
-      <span className="flex h-11 w-11 items-center justify-center rounded-full bg-foreground text-background transition-transform duration-300 group-hover:rotate-45 group-hover:scale-110 sm:h-12 sm:w-12">
-        <ArrowUpRight className="h-5 w-5" />
-      </span>
-    </a>
-  );
-}
+import { site, tickerItems } from "@/lib/data";
 
 export function Footer() {
+  const ticker = [...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems];
+
   return (
-    <footer className="bg-background-2">
-      <div className="mx-auto flex max-w-6xl items-end justify-between gap-6 border-t border-border px-4 pb-10 pt-8 sm:px-6">
-        <div className="space-y-1.5 text-sm text-muted">
-          <p>
-            © {new Date().getFullYear()} {site.name} · {site.role}
-          </p>
-          <p>{site.location}</p>
-          <p>Designed &amp; built by {site.name}</p>
+    <footer className="relative overflow-hidden pt-10">
+      <div className="overflow-hidden border-y border-border py-3">
+        <div className="flex w-max animate-marquee gap-8 motion-reduce:animate-none">
+          {ticker.map((item, i) => (
+            <span
+              key={i}
+              aria-hidden={i >= tickerItems.length}
+              className="flex shrink-0 items-center gap-8 whitespace-nowrap font-mono text-sm uppercase tracking-[0.12em] text-muted"
+            >
+              {item}
+              <span aria-hidden className="text-accent">
+                ✦
+              </span>
+            </span>
+          ))}
         </div>
-        <GetInTouchBadge />
       </div>
+
+      <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 pt-8 text-sm text-muted sm:flex-row sm:items-center sm:justify-between sm:px-6">
+        <p>
+          © {new Date().getFullYear()} {site.name} · {site.role}
+        </p>
+        <p>Designed &amp; built by {site.name}</p>
+        <a href="#top" className="font-mono text-xs text-foreground underline decoration-accent decoration-2 underline-offset-4">
+          back to top ↑
+        </a>
+      </div>
+
+      <p
+        aria-hidden
+        className="mt-6 select-none whitespace-nowrap text-center font-display text-[14.5vw] font-extrabold leading-[0.78] tracking-[-0.03em] text-foreground [font-stretch:86%] sm:mt-4"
+      >
+        clintdoesdev<span className="text-accent">.</span>
+      </p>
     </footer>
   );
 }

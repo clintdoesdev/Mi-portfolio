@@ -1,109 +1,90 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useRef } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
+import type { PointerEvent } from "react";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { HighlightText } from "@/components/ui/HighlightText";
+import { Marquee } from "@/components/ui/Marquee";
 import { Reveal } from "@/components/ui/Reveal";
-import { ScrollRevealText } from "@/components/ui/ScrollRevealText";
 import { alsoFamiliar, approach, skills } from "@/lib/data";
-import { useMediaQuery } from "@/lib/useMediaQuery";
 
-const tints: Record<(typeof skills)[number]["tint"], string> = {
-  white: "bg-white/90 dark:bg-white/[0.07]",
-  lavender: "bg-[#ece6fd] dark:bg-violet-400/15",
-  mint: "bg-[#e1f4e8] dark:bg-emerald-400/15",
-  cream: "bg-[#f6f0de] dark:bg-amber-300/15",
-  sky: "bg-[#e1edfb] dark:bg-sky-400/15",
-  rose: "bg-[#fbe4ec] dark:bg-pink-400/15",
-};
+function SkillTile({ skill, index }: { skill: (typeof skills)[number]; index: number }) {
+  const rx = useMotionValue(0);
+  const ry = useMotionValue(0);
+  const rotateX = useSpring(rx, { stiffness: 220, damping: 18 });
+  const rotateY = useSpring(ry, { stiffness: 220, damping: 18 });
 
-// Where each card rests in the cluster: centre point in % plus a tilt.
-const layout = [
-  { x: 36, y: 12, r: -6 },
-  { x: 68, y: 21, r: 5 },
-  { x: 32, y: 35, r: -8 },
-  { x: 68, y: 45, r: 7 },
-  { x: 42, y: 58, r: 2 },
-  { x: 33, y: 76, r: 8 },
-  { x: 67, y: 69, r: -7 },
-  { x: 56, y: 90, r: -3 },
-];
+  function onMove(e: PointerEvent<HTMLDivElement>) {
+    if (e.pointerType !== "mouse") return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    ry.set(((e.clientX - rect.left) / rect.width - 0.5) * 16);
+    rx.set(((e.clientY - rect.top) / rect.height - 0.5) * -16);
+  }
 
-export function WhatIDo() {
-  const clusterRef = useRef<HTMLDivElement>(null);
-  // Dragging would swallow touch scrolling, so it is a mouse/trackpad-only treat.
-  const canDrag = useMediaQuery("(pointer: fine)");
+  function onLeave() {
+    rx.set(0);
+    ry.set(0);
+  }
 
   return (
-    <section id="skills" className="relative py-24 md:py-36">
+    <motion.li
+      initial={{ opacity: 0, y: 30, scale: 0.9 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, margin: "-8% 0px" }}
+      transition={{ type: "spring", stiffness: 200, damping: 18, delay: (index % 4) * 0.07 }}
+      style={{ perspective: 800 }}
+    >
+      <motion.div
+        onPointerMove={onMove}
+        onPointerLeave={onLeave}
+        style={{ rotateX, rotateY }}
+        className="group h-full rounded-3xl border border-border bg-surface p-4 transition-shadow duration-300 hover:shadow-lift sm:p-5"
+      >
+        <span
+          className="relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-[1.05rem] font-display text-xl font-extrabold tracking-tight shadow-[0_10px_20px_-10px_rgba(0,0,0,0.5),inset_0_-3px_0_rgba(0,0,0,0.15)] transition-transform duration-300 group-hover:-translate-y-1 group-hover:rotate-[-6deg] sm:h-16 sm:w-16 sm:text-2xl"
+          style={{
+            background: `linear-gradient(145deg, ${skill.from}, ${skill.to})`,
+            color: skill.darkText ? "#141416" : "#ffffff",
+          }}
+        >
+          <span aria-hidden className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/35 to-transparent" />
+          <span className="relative">{skill.abbr}</span>
+        </span>
+        <h3 className="mt-4 font-display text-lg font-bold leading-tight tracking-tight text-foreground sm:text-xl">
+          {skill.title}
+        </h3>
+        <p className="mt-1 text-sm leading-snug text-muted">{skill.caption}</p>
+      </motion.div>
+    </motion.li>
+  );
+}
+
+export function WhatIDo() {
+  return (
+    <section id="skills" className="relative py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <Eyebrow>What I do</Eyebrow>
+        <Eyebrow index="01">what i do</Eyebrow>
 
-        <div className="mt-8 grid items-center gap-12 lg:mt-4 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
-          <div ref={clusterRef} className="relative mx-auto h-[24rem] w-full max-w-md sm:h-[28rem] lg:max-w-lg">
-            {skills.map((skill, i) => {
-              const spot = layout[i % layout.length];
-              return (
-                <div
-                  key={skill.title}
-                  className="absolute -translate-x-1/2 -translate-y-1/2"
-                  style={{ left: `${spot.x}%`, top: `${spot.y}%`, zIndex: i }}
-                >
-                  <motion.div
-                    drag={canDrag}
-                    dragConstraints={clusterRef}
-                    dragElastic={0.18}
-                    whileDrag={{ scale: 1.08, zIndex: 40, cursor: "grabbing" }}
-                    whileHover={{ scale: 1.04, rotate: spot.r * 0.4 }}
-                    initial={{ opacity: 0, scale: 0.5, rotate: 0 }}
-                    whileInView={{ opacity: 1, scale: 1, rotate: spot.r }}
-                    viewport={{ once: true, margin: "-15% 0px" }}
-                    transition={{ type: "spring", stiffness: 180, damping: 16, delay: i * 0.06 }}
-                    className={`relative ${canDrag ? "cursor-grab" : ""}`}
-                  >
-                    <div
-                      className={`shadow-soft animate-bob rounded-2xl border border-white/80 px-3 py-2 backdrop-blur-md sm:px-4 sm:py-2.5 dark:border-white/10 ${tints[skill.tint]}`}
-                      style={{ animationDelay: `${-i * 0.8}s`, animationDuration: `${6 + (i % 3)}s` }}
-                    >
-                      <p className="whitespace-nowrap text-[10px] text-muted sm:text-[11px]">{skill.caption}</p>
-                      <p className="whitespace-nowrap font-display text-base font-semibold tracking-tight text-foreground sm:text-xl">
-                        {skill.title}
-                      </p>
-                    </div>
-                  </motion.div>
-                </div>
-              );
-            })}
-            <p className="pointer-events-none absolute -bottom-9 left-1/2 hidden -translate-x-1/2 whitespace-nowrap font-serif text-base italic text-muted pointer-fine:block">
-              (go on, drag them around)
+        <HighlightText
+          text={approach.paragraphs[0]}
+          highlights={["converts", "ranks", "scales", "backend"]}
+          className="mt-8 max-w-5xl text-balance font-display text-[1.85rem] font-bold leading-[1.08] tracking-[-0.03em] text-foreground sm:text-5xl lg:text-[3.6rem]"
+        />
+
+        <ul className="mt-16 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+          {skills.map((skill, i) => (
+            <SkillTile key={skill.title} skill={skill} index={i} />
+          ))}
+        </ul>
+
+        <Reveal delay={0.1}>
+          <div className="mt-14">
+            <p className="font-mono text-xs text-muted">
+              <span className="text-accent">&gt;</span> also familiar with
             </p>
+            <Marquee items={alsoFamiliar} className="mt-4" />
           </div>
-
-          <div>
-            <ScrollRevealText
-              text={approach.paragraphs[0]}
-              className="text-balance font-display text-[1.7rem] font-semibold leading-[1.1] tracking-[-0.035em] text-foreground sm:text-4xl lg:text-[2.6rem]"
-            />
-
-            <Reveal delay={0.1}>
-              <div className="mt-10">
-                <p className="text-xs font-medium uppercase tracking-[0.22em] text-muted">
-                  Also familiar with
-                </p>
-                <ul className="mt-4 flex flex-wrap gap-2">
-                  {alsoFamiliar.map((tool) => (
-                    <li
-                      key={tool}
-                      className="rounded-full border border-border bg-surface px-3.5 py-1.5 text-sm text-muted transition-colors hover:text-foreground"
-                    >
-                      {tool}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-          </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

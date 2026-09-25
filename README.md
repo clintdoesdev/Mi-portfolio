@@ -1,27 +1,27 @@
 # clintdoesdev.site
 
-Clinton's portfolio — a single-page Next.js site built with TypeScript, Tailwind CSS, Framer Motion, and Matter.js.
+Clinton's portfolio — a single-page Next.js site built with TypeScript, Tailwind CSS, and Framer Motion.
 
 ## Stack
 
 - [Next.js](https://nextjs.org) (App Router)
 - TypeScript
 - Tailwind CSS v4
-- Framer Motion for reveals, draggable cards, and scroll-linked text
-- [Matter.js](https://brm.io/matter-js/) for the hero's physics pill pile
+- Framer Motion for reveals, the swinging dev pass, and scroll-linked text
 
 ## Structure
 
 All content lives in one route (`src/app/page.tsx`) composed from section components in `src/components/`:
 
-- `Hero` — headline with an inline light/dark `ThemeToggle`, over `PhysicsPills` (drag, flick, or tap the pills)
-- `WhatIDo` — draggable skill cards and a paragraph that sharpens into focus as you scroll
-- `Work` — case-study cards with illustrated device mockups (`ui/ProjectMockups.tsx`)
-- `About` — sticker tags, taped polaroid, stats, and the TikTok note
-- `Process` — the "understand, build, ship" timeline
-- `Contact` + `Footer` — googly eyes, rotating call to action, and socials
+- `Nav` — logo, section links, and the keycap light/dark `ThemeToggle`
+- `Hero` — letter-drop headline over an interactive `Keyboard` (hover/tap the keys, or type on your own keyboard)
+- `WhatIDo` — highlighter-on-scroll paragraph and app-icon skill tiles
+- `Work` — project rows with illustrated device mockups (`ui/ProjectMockups.tsx`)
+- `About` — swinging dev pass, promise checklist, stats, and the TikTok card
+- `Process` — the "understand, build, ship" steps
+- `Contact` + `Footer` — typewriter call to action, terminal status, socials, ticker, and wordmark
 
-Editable copy — bio, stats, skills, hero pills, projects, process steps, contact links — lives in `src/lib/data.ts`. The theme defaults to light; a saved choice is applied before first paint by the inline script in `src/lib/theme-script.ts`.
+Editable copy — bio, stats, skills, keyboard keys, projects, process steps, contact links — lives in `src/lib/data.ts`. The theme defaults to light; a saved choice is applied before first paint by the inline script in `src/lib/theme-script.ts`.
 
 ## Getting started
 

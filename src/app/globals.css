@@ -3,32 +3,51 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 :root {
-  --background: #f4f4f2;
-  --background-2: #eaeae7;
+  --background: #f5f4f0;
+  --background-2: #ebe9e3;
   --surface: #ffffff;
-  --surface-2: #f8f8f6;
-  --border: #e2e2de;
-  --foreground: #111112;
-  --muted: #6c6c73;
-  --faint: #a6a6ab;
-  --accent: #ff5a1f;
-  --brand: #f5d40e;
-  --shadow-color: 20 20 24;
+  --surface-2: #f9f8f5;
+  --border: #e2dfd7;
+  --foreground: #141416;
+  --muted: #6a6970;
+  --faint: #aaa8a2;
+  --accent: #f5d40e;
+  --ink: #141416;
+  --shadow-color: 32 28 18;
+
+  /* Keycaps: cream alphas, warm-grey modifiers. */
+  --key-top: #fdfcf9;
+  --key-top-2: #efece5;
+  --key-skirt: #cfcabf;
+  --key-legend: #2a2a2e;
+  --mod-top: #dedad1;
+  --mod-top-2: #cfcabf;
+  --mod-skirt: #aba498;
+  --tray: #e3e0d8;
+  --tray-edge: #d2cec4;
   color-scheme: light;
 }
 
 [data-theme="dark"] {
-  --background: #0c0c0e;
-  --background-2: #141417;
-  --surface: #19191c;
-  --surface-2: #202024;
-  --border: #2a2a2f;
-  --foreground: #f4f4f2;
-  --muted: #a0a0a8;
-  --faint: #5c5c63;
-  --accent: #ff6a2e;
-  --brand: #f5d40e;
+  --background: #0e0e10;
+  --background-2: #16161a;
+  --surface: #1a1a1e;
+  --surface-2: #222227;
+  --border: #2b2b31;
+  --foreground: #f3f2ee;
+  --muted: #9f9ea6;
+  --faint: #5d5c63;
   --shadow-color: 0 0 0;
+
+  --key-top: #3a3a41;
+  --key-top-2: #2e2e34;
+  --key-skirt: #141417;
+  --key-legend: #ecebe6;
+  --mod-top: #4a4a52;
+  --mod-top-2: #3d3d44;
+  --mod-skirt: #1b1b1f;
+  --tray: #1f1f24;
+  --tray-edge: #111114;
   color-scheme: dark;
 }
 
@@ -42,15 +61,15 @@
   --color-muted: var(--muted);
   --color-faint: var(--faint);
   --color-accent: var(--accent);
-  --color-brand: var(--brand);
-  --font-sans: var(--font-inter);
-  --font-display: var(--font-inter-tight);
-  --font-serif: var(--font-instrument-serif);
+  --color-ink: var(--ink);
+  --font-sans: var(--font-geist-sans);
+  --font-display: var(--font-bricolage);
   --font-mono: var(--font-geist-mono);
   --animate-bob: bob 6s ease-in-out infinite;
-  --animate-spin-slow: spin-slow 14s linear infinite;
-  --animate-marquee: marquee 30s linear infinite;
-  --animate-blink: blink 5s ease-in-out infinite;
+  --animate-marquee: marquee 32s linear infinite;
+  --animate-caret: caret 1.05s steps(1) infinite;
+  --animate-sway: sway 5s ease-in-out infinite;
+  --animate-wave: wave 2.6s ease-in-out infinite;
 }
 
 @keyframes bob {
@@ -63,15 +82,6 @@
   }
 }
 
-@keyframes spin-slow {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 @keyframes marquee {
   from {
     transform: translateX(0);
@@ -81,14 +91,35 @@
   }
 }
 
-@keyframes blink {
-  0%,
-  92%,
-  100% {
-    transform: scaleY(1);
+@keyframes caret {
+  50% {
+    opacity: 0;
   }
-  95% {
-    transform: scaleY(0.1);
+}
+
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(-2.5deg);
+  }
+  50% {
+    transform: rotate(2.5deg);
+  }
+}
+
+@keyframes wave {
+  0%,
+  60%,
+  100% {
+    transform: rotate(0deg);
+  }
+  10%,
+  30% {
+    transform: rotate(16deg);
+  }
+  20%,
+  40% {
+    transform: rotate(-8deg);
   }
 }
 
@@ -101,7 +132,7 @@ body {
   color: var(--foreground);
 }
 
-/* Brief, opt-in colour transition while the theme toggle flips. */
+/* Brief, opt-in colour transition while the theme flips. */
 html.theme-transition,
 html.theme-transition *,
 html.theme-transition *::before,
@@ -114,8 +145,8 @@ html.theme-transition *::after {
 }
 
 ::selection {
-  background: var(--brand);
-  color: #111112;
+  background: var(--accent);
+  color: var(--ink);
 }
 
 * {
@@ -135,18 +166,194 @@ section[id] {
 .shadow-lift {
   box-shadow:
     0 2px 4px rgb(var(--shadow-color) / 0.06),
-    0 28px 60px -24px rgb(var(--shadow-color) / 0.42);
+    0 30px 60px -24px rgb(var(--shadow-color) / 0.45);
 }
 
-/* Soft "window light" shadows cast across the project backdrops. */
-.gobo {
-  background-image: repeating-linear-gradient(
-    115deg,
-    transparent 0 46px,
-    rgb(0 0 0 / 0.16) 46px 60px,
-    transparent 60px 92px
-  );
-  filter: blur(10px);
+.dot-grid {
+  background-image: radial-gradient(var(--border) 1.2px, transparent 1.2px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, black 25%, transparent 75%);
+}
+
+/* ---- Hero headline: letters drop in one by one ------------------------- */
+@keyframes char-in {
+  0% {
+    opacity: 0;
+    transform: translateY(0.45em) rotate(var(--r, 0deg)) scale(0.6);
+  }
+  55% {
+    opacity: 1;
+    transform: translateY(-0.08em) rotate(0deg) scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.char {
+  display: inline-block;
+  opacity: 0;
+  animation: char-in 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation-delay: calc(var(--i) * 40ms + 150ms);
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.fade-up {
+  opacity: 0;
+  animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Highlighter swipe behind a word. */
+@keyframes marker-in {
+  from {
+    transform: scaleX(0) rotate(-1.5deg);
+  }
+  to {
+    transform: scaleX(1) rotate(-1.5deg);
+  }
+}
+
+.marker {
+  position: relative;
+  isolation: isolate;
+  color: var(--ink);
+}
+
+.marker::before {
+  content: "";
+  position: absolute;
+  inset: 0.1em -0.1em 0.02em;
+  z-index: -1;
+  border-radius: 0.06em;
+  background: var(--accent);
+  transform-origin: left center;
+  transform: scaleX(0) rotate(-1.5deg);
+  animation: marker-in 0.65s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  animation-delay: var(--marker-delay, 0.45s);
+}
+
+/* ---- Keycaps --------------------------------------------------------------- */
+.keycap {
+  --top: var(--key-top);
+  --top-2: var(--key-top-2);
+  --skirt: var(--key-skirt);
+  --legend: var(--key-legend);
+  position: relative;
+  color: var(--legend);
+  background: linear-gradient(180deg, var(--top), var(--top-2));
+  border-radius: 0.7rem;
+  box-shadow:
+    0 0.32rem 0 var(--skirt),
+    0 0.6rem 1rem -0.35rem rgb(0 0 0 / 0.4),
+    inset 0 1px 0 rgb(255 255 255 / 0.45);
+  transition:
+    transform 80ms ease,
+    box-shadow 80ms ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.keycap::before {
+  content: "";
+  position: absolute;
+  inset: 0.2rem 0.24rem 0.4rem;
+  border-radius: 0.5rem;
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.3), transparent 70%);
+  pointer-events: none;
+}
+
+.keycap[data-variant="mod"] {
+  --top: var(--mod-top);
+  --top-2: var(--mod-top-2);
+  --skirt: var(--mod-skirt);
+}
+
+.keycap[data-variant="yellow"] {
+  --top: #ffe23f;
+  --top-2: #f5d40e;
+  --skirt: #b39800;
+  --legend: #141416;
+}
+
+.keycap[data-variant="ink"] {
+  --top: #2c2c31;
+  --top-2: #1c1c20;
+  --skirt: #000000;
+  --legend: #f5d40e;
+}
+
+@media (hover: hover) {
+  .keycap:hover {
+    transform: translateY(0.12rem);
+    box-shadow:
+      0 0.2rem 0 var(--skirt),
+      0 0.4rem 0.7rem -0.3rem rgb(0 0 0 / 0.4),
+      inset 0 1px 0 rgb(255 255 255 / 0.45);
+  }
+}
+
+.keycap[data-pressed] {
+  transform: translateY(0.28rem);
+  box-shadow:
+    0 0.04rem 0 var(--skirt),
+    0 0.15rem 0.3rem -0.1rem rgb(0 0 0 / 0.4),
+    inset 0 1px 0 rgb(255 255 255 / 0.3);
+}
+
+@keyframes key-in {
+  from {
+    opacity: 0;
+    transform: translateY(-1.4rem) rotate(var(--r, 0deg));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.key-in {
+  opacity: 0;
+  animation: key-in 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: calc(var(--k) * 28ms + 700ms);
+}
+
+@keyframes typing {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.typing {
+  animation: typing 0.45s steps(22, end) both;
+}
+
+@keyframes led {
+  0% {
+    background: #f5d40e;
+    box-shadow: 0 0 8px #f5d40e;
+  }
+  100% {
+    background: #4a4a50;
+    box-shadow: none;
+  }
+}
+
+.led-flash {
+  animation: led 0.5s ease-out forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {

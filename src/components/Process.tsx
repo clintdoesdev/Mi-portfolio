@@ -16,83 +16,78 @@ const glyphs: Record<(typeof processSteps)[number]["glyph"], React.ReactNode> = 
 export function Process() {
   return (
     <section id="process" className="relative overflow-hidden py-24 md:py-32">
-      <div className="mx-auto max-w-6xl px-4 text-center sm:px-6">
-        <Eyebrow>How I work</Eyebrow>
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <Eyebrow index="04">how i work</Eyebrow>
         <Reveal>
-          <h2 className="mt-3 text-balance font-display text-4xl font-bold tracking-[-0.035em] sm:text-6xl">
-            Understand. Build. Ship.
+          <h2 className="mt-5 text-balance font-display text-4xl font-extrabold leading-[0.95] tracking-[-0.03em] sm:text-6xl">
+            Understand. Build. <span className="marker px-[0.06em] [--marker-delay:0.2s]">Ship.</span>
           </h2>
         </Reveal>
-      </div>
 
-      <ol className="relative mx-auto mt-14 max-w-[26rem] px-4 sm:max-w-lg">
-        <span
-          aria-hidden
-          className="absolute bottom-10 left-1/2 top-4 w-px -translate-x-1/2 bg-gradient-to-b from-border via-border to-transparent"
-        />
-        {processSteps.map((step, i) => {
-          const tilt = i % 2 === 0 ? -1.5 : 1.5;
-          return (
-            <li key={step.step} className="relative flex flex-col items-center pb-14 last:pb-0">
-              <Reveal>
-                <span className="relative inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-1.5 text-sm text-foreground shadow-soft">
-                  {step.step}
-                  <span className="text-faint">–</span>
-                  <span className="text-muted">{step.phase}</span>
-                </span>
-              </Reveal>
-              <span
-                aria-hidden
-                className="relative my-4 h-2.5 w-2.5 rounded-full ring-[5px] ring-background"
-                style={{ background: step.color }}
-              />
+        <ol className="relative mt-14 grid gap-5 md:grid-cols-3 md:gap-6">
+          {/* The rail that links the steps: vertical on phones, horizontal from md up. */}
+          <motion.span
+            aria-hidden
+            initial={{ scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: true, margin: "-20% 0px" }}
+            transition={{ duration: 1.2, ease: [0.65, 0, 0.35, 1] }}
+            className="absolute bottom-8 left-[2.2rem] top-8 w-0.5 origin-top rounded-full bg-accent md:hidden"
+          />
+          <motion.span
+            aria-hidden
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true, margin: "-20% 0px" }}
+            transition={{ duration: 1.2, ease: [0.65, 0, 0.35, 1] }}
+            className="absolute left-[12%] right-[12%] top-[2.2rem] hidden h-0.5 origin-left rounded-full bg-accent md:block"
+          />
 
-              <motion.article
-                initial={{ opacity: 0, y: 40, rotate: tilt * 4 }}
-                whileInView={{ opacity: 1, y: 0, rotate: tilt }}
-                whileHover={{ rotate: 0, y: -4 }}
-                viewport={{ once: true, margin: "-12% 0px" }}
-                transition={{ type: "spring", stiffness: 110, damping: 16 }}
-                className="shadow-lift relative w-full rounded-3xl border border-border/60 bg-surface p-6 text-left sm:p-7"
-              >
-                <div className="flex items-center gap-3.5">
-                  <span
-                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-white shadow-[inset_0_-3px_0_rgba(0,0,0,0.15)]"
-                    style={{ background: step.color }}
-                  >
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      aria-hidden
-                      className="h-6 w-6"
-                    >
-                      {glyphs[step.glyph]}
-                    </svg>
-                  </span>
-                  <div>
-                    <h3 className="font-display text-xl font-bold tracking-tight text-foreground sm:text-2xl">
-                      {step.title}
-                    </h3>
-                    <p className="text-sm text-muted">{step.subtitle}</p>
-                  </div>
-                </div>
+          {processSteps.map((step, i) => (
+            <motion.li
+              key={step.step}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-12% 0px" }}
+              transition={{ duration: 0.7, delay: 0.15 + i * 0.18, ease: [0.16, 1, 0.3, 1] }}
+              className="relative flex gap-4 md:flex-col md:gap-5"
+            >
+              <span className="relative z-10 flex h-[4.4rem] w-[4.4rem] shrink-0 flex-col items-center justify-center rounded-2xl border border-border bg-surface shadow-soft md:mx-auto">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke={step.color}
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden
+                  className="h-6 w-6"
+                >
+                  {glyphs[step.glyph]}
+                </svg>
+                <span className="mt-1 font-mono text-[10px] text-muted">{String(i + 1).padStart(2, "0")}</span>
+              </span>
+
+              <article className="flex-1 rounded-3xl border border-border bg-surface p-5 transition-transform duration-300 hover:-translate-y-1 sm:p-6">
+                <p className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-muted">
+                  <span className="h-2 w-2 rounded-full" style={{ background: step.color }} />
+                  {step.step} · {step.phase}
+                </p>
+                <h3 className="mt-2 font-display text-2xl font-extrabold tracking-tight text-foreground">{step.title}</h3>
+                <p className="text-sm text-muted">{step.subtitle}</p>
                 <p className="mt-4 text-pretty text-[15px] leading-relaxed text-muted">{step.description}</p>
                 <ul className="mt-5 flex flex-wrap gap-2">
                   {step.tags.map((tag) => (
-                    <li key={tag} className="rounded-full bg-background-2 px-3 py-1 text-xs font-medium text-muted">
+                    <li key={tag} className="rounded-lg bg-background-2 px-2.5 py-1 font-mono text-[11px] text-muted">
                       {tag}
                     </li>
                   ))}
                 </ul>
-              </motion.article>
-            </li>
-          );
-        })}
-      </ol>
+              </article>
+            </motion.li>
+          ))}
+        </ol>
+      </div>
     </section>
   );
 }

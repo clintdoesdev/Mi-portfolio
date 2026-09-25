@@ -24,7 +24,7 @@ const bricolage = Bricolage_Grotesque({
 
 const title = "Clinton — Full-stack & Web3 Developer";
 const description =
-  "I build websites and digital products end to end — landing pages, marketing sites, SaaS platforms, dashboards, and Web3 apps. Working with founders and businesses across Africa and the diaspora.";
+  "I build websites and digital products end to end — landing pages, marketing sites, SaaS platforms, dashboards, and Web3 apps. Working with founders, agencies, and businesses worldwide.";
 
 export const metadata: Metadata = {
   title,

@@ -22,7 +22,7 @@ const terminalLines: TerminalLine[] = [
     ? [{ command: "clint --response-time", output: `${responseTime.value}${responseTime.suffix} on average` }]
     : []),
   { command: "clint --based", output: site.location },
-  { command: "clint --trusted-by", output: "Founders across Africa & the diaspora" },
+  { command: "clint --works-with", output: "Founders, agencies & businesses — anywhere" },
 ];
 
 export function Contact() {

@@ -6,17 +6,17 @@ export const site = {
   x: "https://x.com/clintdoesdev",
   tiktok: "https://tiktok.com/@clintdoesdev",
   available: true,
-  location: "Remote · Africa & the diaspora",
+  location: "Remote · Worldwide",
 };
 
 export const heroBio =
   "I'm Clinton — I build websites and digital products end to end. Landing pages, marketing sites, SaaS platforms, dashboards, and everything in between. Working with founders, teams, and businesses across regions.";
 
 export const stats = [
-  { value: 2.5, suffix: "", decimals: 1, label: "Years building" },
-  { value: 2, suffix: "+", decimals: 0, label: "Projects shipped" },
+  { value: 3, suffix: "", decimals: 0, label: "Years building" },
+  { value: 30, suffix: "+", decimals: 0, label: "Projects shipped" },
   { value: 2, suffix: "", decimals: 0, label: "Countries served" },
-  { value: 48, suffix: "h", decimals: 0, label: "Avg response time" },
+  { value: 24, suffix: "h", decimals: 0, label: "Avg response time" },
 ];
 
 export const approach = {
@@ -82,7 +82,7 @@ export const keyboardRows: Keycap[][] = [
   [
     { legend: "⇧", variant: "mod", grow: 1.6, message: "shifting to production", keys: ["Shift"] },
     { legend: "Ξ", label: "Web3 (on request)", variant: "alpha", grow: 2 },
-    { legend: "₦", label: "Paystack integration", variant: "alpha", grow: 2.2 },
+    { legend: "$", label: "Paystack integration", variant: "alpha", grow: 2.2 },
     { legend: "#", label: "SEO-ready builds", variant: "alpha", grow: 2 },
     { legend: "↵", variant: "ink", grow: 1.5, message: "deploying… ✓ live", keys: ["Enter"] },
   ],
@@ -94,10 +94,10 @@ export const keyboardRows: Keycap[][] = [
       label: "Fast delivery",
       variant: "yellow",
       grow: 5,
-      message: "fast delivery — avg 48h response",
+      message: "fast delivery — avg 24h response",
       keys: [" "],
     },
-    { legend: "✺", label: "Africa-focused", variant: "alpha", grow: 2 },
+    { legend: "✺", label: "Clients worldwide", variant: "alpha", grow: 2, message: "open to clients anywhere" },
     { legend: "$_", variant: "mod", message: "npm run ship", keys: ["$"], hideOnMobile: true },
   ],
 ];
@@ -221,7 +221,7 @@ export const processSteps: {
     subtitle: "Proud to show",
     description:
       "Built properly and shipped fast — handed over as something you're proud to show.",
-    tags: [approach.promise[3], "48h avg response"],
+    tags: [approach.promise[3], "24h avg response"],
     color: "#3b82f6",
     glyph: "rocket",
   },
@@ -233,7 +233,7 @@ export const tickerItems = [
   "Available for new projects",
   site.email,
   "Let's build something great",
-  "Remote · Africa & diaspora",
+  "Remote · Worldwide",
 ];
 
 export const navLinks = [

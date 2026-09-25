@@ -1,45 +1,65 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 :root {
-  --background: #0b0b0d;
-  --surface: #131316;
-  --surface-2: #1a1a1f;
-  --border: #232328;
-  --foreground: #f5f5f2;
-  --muted: #9a9aa4;
-  --accent: #f5d40e;
-  --accent-ink: #14140a;
-  --accent-2: #ff8a3d;
+  --background: #f4f4f2;
+  --background-2: #eaeae7;
+  --surface: #ffffff;
+  --surface-2: #f8f8f6;
+  --border: #e2e2de;
+  --foreground: #111112;
+  --muted: #6c6c73;
+  --faint: #a6a6ab;
+  --accent: #ff5a1f;
+  --brand: #f5d40e;
+  --shadow-color: 20 20 24;
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --background: #0c0c0e;
+  --background-2: #141417;
+  --surface: #19191c;
+  --surface-2: #202024;
+  --border: #2a2a2f;
+  --foreground: #f4f4f2;
+  --muted: #a0a0a8;
+  --faint: #5c5c63;
+  --accent: #ff6a2e;
+  --brand: #f5d40e;
+  --shadow-color: 0 0 0;
+  color-scheme: dark;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-background-2: var(--background-2);
   --color-surface: var(--surface);
   --color-surface-2: var(--surface-2);
   --color-border: var(--border);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
+  --color-faint: var(--faint);
   --color-accent: var(--accent);
-  --color-accent-ink: var(--accent-ink);
-  --color-accent-2: var(--accent-2);
-  --font-sans: var(--font-geist-sans);
+  --color-brand: var(--brand);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-inter-tight);
+  --font-serif: var(--font-instrument-serif);
   --font-mono: var(--font-geist-mono);
-  --font-display: var(--font-jakarta);
-  --animate-float: float 6s ease-in-out infinite;
-  --animate-float-slow: float 9s ease-in-out infinite;
-  --animate-spin-slow: spin-slow 18s linear infinite;
-  --animate-marquee: marquee 28s linear infinite;
-  --animate-marquee-slow: marquee 40s linear infinite;
-  --animate-marquee-text: marquee 22s linear infinite;
+  --animate-bob: bob 6s ease-in-out infinite;
+  --animate-spin-slow: spin-slow 14s linear infinite;
+  --animate-marquee: marquee 30s linear infinite;
+  --animate-blink: blink 5s ease-in-out infinite;
 }
 
-@keyframes float {
+@keyframes bob {
   0%,
   100% {
-    transform: translateY(0) rotate(var(--float-rotate, 0deg));
+    transform: translateY(0);
   }
   50% {
-    transform: translateY(-14px) rotate(var(--float-rotate, 0deg));
+    transform: translateY(-8px);
   }
 }
 
@@ -61,6 +81,17 @@
   }
 }
 
+@keyframes blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.1);
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -68,23 +99,23 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  position: relative;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 60;
-  pointer-events: none;
-  opacity: 0.05;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+/* Brief, opt-in colour transition while the theme toggle flips. */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition:
+    background-color 0.45s ease,
+    border-color 0.45s ease,
+    color 0.45s ease,
+    fill 0.45s ease !important;
 }
 
 ::selection {
-  background: var(--accent);
-  color: var(--accent-ink);
+  background: var(--brand);
+  color: #111112;
 }
 
 * {
@@ -92,31 +123,30 @@ body::before {
 }
 
 section[id] {
-  scroll-margin-top: 5.5rem;
+  scroll-margin-top: 6rem;
 }
 
-.divider-fade {
-  height: 1px;
-  width: 100%;
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--border) 20%,
-    var(--border) 80%,
-    transparent
+.shadow-soft {
+  box-shadow:
+    0 1px 2px rgb(var(--shadow-color) / 0.06),
+    0 12px 32px -14px rgb(var(--shadow-color) / 0.28);
+}
+
+.shadow-lift {
+  box-shadow:
+    0 2px 4px rgb(var(--shadow-color) / 0.06),
+    0 28px 60px -24px rgb(var(--shadow-color) / 0.42);
+}
+
+/* Soft "window light" shadows cast across the project backdrops. */
+.gobo {
+  background-image: repeating-linear-gradient(
+    115deg,
+    transparent 0 46px,
+    rgb(0 0 0 / 0.16) 46px 60px,
+    transparent 60px 92px
   );
-}
-
-.bg-dot-grid {
-  background-image: radial-gradient(var(--border) 1px, transparent 1px);
-  background-size: 28px 28px;
-}
-
-.text-gradient {
-  background: linear-gradient(90deg, var(--accent), var(--accent-2));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  filter: blur(10px);
 }
 
 @media (prefers-reduced-motion: reduce) {

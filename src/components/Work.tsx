@@ -1,8 +1,7 @@
 import { Eyebrow } from "@/components/ui/Eyebrow";
-import { Glow } from "@/components/ui/Glow";
-import { Shape } from "@/components/ui/FloatingShapes";
+import { ComingSoonScene, ProjectScene } from "@/components/ui/ProjectMockups";
 import { Reveal } from "@/components/ui/Reveal";
-import { projectAccentColors, projectBannerStyles, projectIcons } from "@/components/ui/ProjectIcons";
+import { ArrowUpRight } from "@/components/ui/SocialIcons";
 import { projects } from "@/lib/data";
 
 function slugify(title: string) {
@@ -11,94 +10,103 @@ function slugify(title: string) {
 
 export function Work() {
   return (
-    <section id="work" className="relative overflow-hidden py-24 md:py-32">
-      <Glow className="right-0 top-0 -translate-y-1/3" color={projectAccentColors[1]} opacity={0.1} />
-      <div aria-hidden className="pointer-events-none absolute inset-0 hidden sm:block">
-        <Shape
-          variant="pyramid"
-          from="255,138,61"
-          to="245,140,20"
-          size={40}
-          style={{ top: "10%", left: "6%" }}
-          duration={7.5}
-          rotate={-6}
-        />
-      </div>
-
-      <div className="mx-auto max-w-6xl px-6">
+    <section id="work" className="relative py-24 md:py-32">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <Eyebrow>Selected work</Eyebrow>
         <Reveal>
-          <h2 className="text-balance font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
-            Featured work,
-            <br className="hidden sm:block" /> real solutions.
+          <h2 className="mt-3 max-w-2xl text-balance font-display text-4xl font-bold tracking-[-0.035em] sm:text-6xl">
+            Featured work, real solutions.
           </h2>
-          <p className="mt-4 max-w-xl text-pretty text-muted">
+        </Reveal>
+        <Reveal delay={0.08}>
+          <p className="mt-4 max-w-md text-pretty text-base leading-relaxed text-muted sm:text-lg">
             Selected web application builds by a full-stack web developer.
           </p>
+          <span className="mt-6 inline-flex rounded-full border border-border px-3.5 py-1 text-xs font-medium text-muted">
+            Full-stack
+          </span>
         </Reveal>
 
-        <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <div className="mt-12 grid grid-cols-1 gap-x-6 gap-y-14 md:grid-cols-2">
           {projects.map((project, i) => (
-            <Reveal key={project.title} delay={i * 0.1}>
-              <article
-                id={`work-${slugify(project.title)}`}
-                className="group relative h-full scroll-mt-24 overflow-hidden rounded-3xl border border-border bg-surface transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/40 hover:shadow-[0_24px_60px_-24px_rgba(0,0,0,0.6)]"
-              >
-                <div
-                  className={`relative flex h-40 items-center justify-center overflow-hidden bg-gradient-to-br text-foreground/80 transition-transform duration-500 group-hover:scale-[1.03] ${projectBannerStyles[i % projectBannerStyles.length]}`}
-                >
-                  <div className="absolute inset-0 bg-dot-grid opacity-20" />
-                  <div className="relative h-8 w-8">{projectIcons[i % projectIcons.length]}</div>
+            <Reveal key={project.title} delay={i * 0.08}>
+              <article id={`work-${slugify(project.title)}`} className="group scroll-mt-28">
+                <div className="relative aspect-[5/4] overflow-hidden rounded-3xl">
+                  <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-[1.03]">
+                    <ProjectScene mockup={project.mockup} />
+                  </div>
+                  <span className="absolute left-4 top-4 rounded-full bg-white/80 px-3 py-1 text-[11px] font-semibold text-neutral-900 backdrop-blur-md">
+                    {project.year}
+                  </span>
                 </div>
 
-                <div className="p-6 sm:p-8">
-                  <div className="flex flex-wrap items-center gap-2">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-full border border-border px-3 py-1 text-xs text-muted"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                    <span className="ml-auto text-xs text-muted">
-                      {project.duration} · {project.year}
-                    </span>
-                  </div>
-
-                  <h3 className="mt-4 font-display text-xl font-bold text-foreground">
-                    {project.title}
+                <div className="mt-5 flex items-start justify-between gap-4">
+                  <h3 className="text-lg font-medium tracking-tight text-foreground sm:text-xl">
+                    {project.title}: {project.subtitle}
                   </h3>
-                  <p className="text-sm text-accent/90">{project.subtitle}</p>
+                  {project.href ? (
+                    <a
+                      href={project.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`Open ${project.title}`}
+                      className="mt-1 shrink-0 text-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                    >
+                      <ArrowUpRight className="h-5 w-5" />
+                    </a>
+                  ) : (
+                    <span className="mt-1.5 shrink-0 text-xs text-muted">{project.duration}</span>
+                  )}
+                </div>
 
-                  <p className="mt-3 text-pretty text-sm leading-relaxed text-muted">
-                    {project.description}
-                  </p>
+                <p className="mt-2 text-pretty text-sm leading-relaxed text-muted sm:text-base">
+                  {project.description}
+                </p>
 
-                  <ul className="mt-5 space-y-2.5">
-                    {project.highlights.map((point) => (
-                      <li key={point} className="flex items-start gap-2.5 text-sm text-muted">
-                        <svg
-                          viewBox="0 0 20 20"
-                          fill="none"
-                          className="mt-0.5 h-4 w-4 shrink-0 text-accent"
-                        >
-                          <path
-                            d="M4 10.5l3.5 3.5L16 6"
-                            stroke="currentColor"
-                            strokeWidth="1.8"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                        <span>{point}</span>
-                      </li>
-                    ))}
-                  </ul>
+                <ul className="mt-4 space-y-2">
+                  {project.highlights.map((point) => (
+                    <li key={point} className="flex gap-2.5 text-sm text-muted">
+                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full bg-background-2 px-3 py-1 text-xs font-medium text-muted"
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
               </article>
             </Reveal>
           ))}
+
+          <Reveal className="md:col-span-2">
+            <a href="#contact" className="group block">
+              <div className="relative aspect-[5/4] overflow-hidden rounded-3xl sm:aspect-[21/9]">
+                <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-[1.03]">
+                  <ComingSoonScene />
+                </div>
+                <span className="absolute right-4 top-4 rounded-full bg-neutral-950 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-white">
+                  Coming soon
+                </span>
+              </div>
+              <div className="mt-5 flex items-start justify-between gap-4">
+                <h3 className="text-lg font-medium tracking-tight text-foreground sm:text-xl">
+                  Your product: next on the build list
+                </h3>
+                <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 text-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </div>
+              <p className="mt-2 text-sm text-muted sm:text-base">
+                Have an idea? Let&apos;s ship it.
+              </p>
+            </a>
+          </Reveal>
         </div>
       </div>
     </section>

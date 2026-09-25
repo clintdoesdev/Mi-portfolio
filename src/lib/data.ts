@@ -6,24 +6,11 @@ export const site = {
   x: "https://x.com/clintdoesdev",
   tiktok: "https://tiktok.com/@clintdoesdev",
   available: true,
+  location: "Remote · Africa & the diaspora",
 };
-
-export const heroTags = [
-  "Websites & Landing Pages",
-  "SaaS & Dashboards",
-  "Africa-focused",
-  "Fast delivery",
-];
 
 export const heroBio =
   "I'm Clinton — I build websites and digital products end to end. Landing pages, marketing sites, SaaS platforms, dashboards, and everything in between. Working with founders, teams, and businesses across regions.";
-
-export const heroCardTags = [
-  "Landing pages",
-  "SaaS & dashboards",
-  "SEO-ready builds",
-  "Paystack integration",
-];
 
 export const stats = [
   { value: 2.5, suffix: "", decimals: 1, label: "Years building" },
@@ -58,65 +45,87 @@ export const services = [
   "Web3 (on request)",
 ];
 
-export type SkillCategory = "core" | "backend" | "design" | "specialist";
+export type PillColor =
+  | "pink"
+  | "green"
+  | "yellow"
+  | "blue"
+  | "purple"
+  | "orange"
+  | "teal"
+  | "salmon"
+  | "lavender"
+  | "lime";
+
+export type PillIcon =
+  | "target"
+  | "plus"
+  | "hash"
+  | "globe"
+  | "pencil"
+  | "quote"
+  | "smile"
+  | "square"
+  | "star"
+  | "arrow"
+  | "check"
+  | "bolt"
+  | "code"
+  | "card"
+  | "layers"
+  | "sparkle"
+  | "cube"
+  | "chart";
+
+// The hero pile: every service, hero tag and promise becomes a physics pill,
+// with a few icon-only "buttons" mixed in like confetti.
+export const heroPills: { label: string; color: PillColor; icon: PillIcon }[] = [
+  { label: "Landing Pages", color: "pink", icon: "target" },
+  { label: "SaaS Platforms", color: "orange", icon: "plus" },
+  { label: "Dashboards", color: "purple", icon: "chart" },
+  { label: "Marketing Sites", color: "green", icon: "sparkle" },
+  { label: "APIs & Backends", color: "blue", icon: "code" },
+  { label: "Fast delivery", color: "yellow", icon: "bolt" },
+  { label: "Client Websites", color: "salmon", icon: "globe" },
+  { label: "E-commerce", color: "teal", icon: "card" },
+  { label: "Paystack integration", color: "lavender", icon: "square" },
+  { label: "SEO-ready builds", color: "lime", icon: "hash" },
+  { label: "Web3 (on request)", color: "pink", icon: "cube" },
+  { label: "Africa-focused", color: "teal", icon: "globe" },
+  { label: "Clean code", color: "yellow", icon: "code" },
+  { label: "Smooth UX", color: "blue", icon: "smile" },
+  { label: "Fast queries", color: "orange", icon: "bolt" },
+  { label: "On-time delivery", color: "green", icon: "check" },
+];
+
+export const heroDots: { color: PillColor; icon: PillIcon }[] = [
+  { color: "yellow", icon: "pencil" },
+  { color: "orange", icon: "star" },
+  { color: "blue", icon: "arrow" },
+  { color: "purple", icon: "sparkle" },
+  { color: "pink", icon: "layers" },
+  { color: "green", icon: "smile" },
+  { color: "teal", icon: "check" },
+  { color: "blue", icon: "quote" },
+  { color: "salmon", icon: "target" },
+  { color: "lime", icon: "plus" },
+  { color: "lavender", icon: "star" },
+  { color: "yellow", icon: "hash" },
+];
 
 export const skills: {
-  abbr: string;
-  category: SkillCategory;
   title: string;
-  description: string;
+  caption: string;
+  tint: "white" | "lavender" | "mint" | "cream" | "sky" | "rose";
 }[] = [
-  {
-    abbr: "RE",
-    category: "core",
-    title: "React",
-    description:
-      "Component architecture, hooks, state management, and performance optimization.",
-  },
-  {
-    abbr: "NX",
-    category: "core",
-    title: "Next.js",
-    description: "SSR, SSG, App Router patterns, route design, and polished delivery.",
-  },
-  {
-    abbr: "TS",
-    category: "core",
-    title: "TypeScript",
-    description: "Safer refactors, clearer contracts, and reliable developer experience.",
-  },
-  {
-    abbr: "ND",
-    category: "backend",
-    title: "Node.js",
-    description: "APIs, background tasks, middleware logic, and scalable server workflows.",
-  },
-  {
-    abbr: "DB",
-    category: "backend",
-    title: "Databases",
-    description: "Schema design, ORM-driven workflows, indexing, and query optimization.",
-  },
-  {
-    abbr: "W3",
-    category: "specialist",
-    title: "Web3 & Blockchain",
-    description:
-      "Smart contracts, NFT platforms, wallet integration, and decentralised app architecture.",
-  },
-  {
-    abbr: "UI",
-    category: "design",
-    title: "UI Systems",
-    description: "Responsive layouts, animations, accessibility, and premium visual polish.",
-  },
-  {
-    abbr: "PY",
-    category: "specialist",
-    title: "Paystack & Payments",
-    description:
-      "African payment flows, subscription billing, webhook handling, and multi-country support.",
-  },
+  { title: "React", caption: "hooks, state & performance", tint: "white" },
+  { title: "Next.js", caption: "SSR, SSG & App Router", tint: "cream" },
+  { title: "TypeScript", caption: "safer refactors, clear contracts", tint: "sky" },
+  { title: "Node.js", caption: "APIs, jobs & middleware", tint: "mint" },
+  { title: "Databases", caption: "schemas, indexing & queries", tint: "white" },
+  { title: "Web3 & Blockchain", caption: "contracts, NFTs & wallets", tint: "lavender" },
+  { title: "UI Systems", caption: "responsive, animated, accessible", tint: "rose" },
+  { title: "Paystack & Payments", caption: "billing, webhooks, multi-country", tint: "cream" },
 ];
 
 export const alsoFamiliar = [
@@ -130,7 +139,19 @@ export const alsoFamiliar = [
   "PostgreSQL",
 ];
 
-export const projects = [
+export type ProjectMockup = "dashboard" | "marketplace";
+
+export const projects: {
+  title: string;
+  subtitle: string;
+  tags: string[];
+  duration: string;
+  year: string;
+  description: string;
+  highlights: string[];
+  mockup: ProjectMockup;
+  href?: string;
+}[] = [
   {
     title: "Spendify",
     subtitle: "Personal Finance Dashboard",
@@ -143,7 +164,7 @@ export const projects = [
       "Finance overview dashboard with income, expense, and savings stat cards",
       "Interactive analytics using Recharts for category and monthly trend visualisation",
     ],
-    href: undefined as string | undefined,
+    mockup: "dashboard",
   },
   {
     title: "Magnus Skill Mart",
@@ -157,13 +178,65 @@ export const projects = [
       "Web3 wallet connection and on-chain skill verification",
       "NFT-style skill card marketplace with filtering",
     ],
-    href: undefined as string | undefined,
+    mockup: "marketplace",
   },
+];
+
+// "Understand, build it clean, ship it" — the approach, laid out as a journey.
+export const processSteps: {
+  step: string;
+  phase: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  tags: string[];
+  color: string;
+  glyph: "search" | "code" | "rocket";
+}[] = [
+  {
+    step: "Step 01",
+    phase: "Understand",
+    title: "Understand",
+    subtitle: "What you need",
+    description:
+      "Landing page, marketing site, SaaS platform, internal tool, or a full product from zero — it starts with understanding what the project needs.",
+    tags: ["Founders", "Agencies", "Businesses"],
+    color: "#22c55e",
+    glyph: "search",
+  },
+  {
+    step: "Step 02",
+    phase: "Build",
+    title: "Build it clean",
+    subtitle: "The full scope",
+    description:
+      "Whether that's a one-page site or a multi-service platform with auth, payments, and a dashboard — I handle the full scope.",
+    tags: approach.promise.slice(0, 3),
+    color: "#8b5cf6",
+    glyph: "code",
+  },
+  {
+    step: "Step 03",
+    phase: "Ship",
+    title: "Ship it",
+    subtitle: "Proud to show",
+    description:
+      "Built properly and shipped fast — handed over as something you're proud to show.",
+    tags: [approach.promise[3], "48h avg response"],
+    color: "#3b82f6",
+    glyph: "rocket",
+  },
+];
+
+export const ctaWords = [
+  { word: "BUILD", color: "#34d399" },
+  { word: "SHIP", color: "#8b5cf6" },
+  { word: "MAKE", color: "#ff6a2e" },
+  { word: "LAUNCH", color: "#f472b6" },
 ];
 
 export const navLinks = [
   { label: "Work", href: "#work" },
   { label: "Skills", href: "#skills" },
   { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
 ];

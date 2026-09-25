@@ -1,19 +1,19 @@
 import { About } from "@/components/About";
-import { CTA } from "@/components/CTA";
+import { Contact } from "@/components/Contact";
 import { Hero } from "@/components/Hero";
-import { Skills } from "@/components/Skills";
-import { Stats } from "@/components/Stats";
+import { Process } from "@/components/Process";
+import { WhatIDo } from "@/components/WhatIDo";
 import { Work } from "@/components/Work";
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <Stats />
-      <About />
-      <Skills />
+      <WhatIDo />
       <Work />
-      <CTA />
+      <About />
+      <Process />
+      <Contact />
     </>
   );
 }

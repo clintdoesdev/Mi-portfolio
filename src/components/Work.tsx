@@ -33,7 +33,9 @@ export function Work() {
             <Reveal key={project.title} y={40}>
               <article
                 id={`work-${slugify(project.title)}`}
-                className="group grid scroll-mt-28 gap-6 rounded-[2rem] border border-border bg-surface p-3 sm:p-4 md:grid-cols-[1.3fr_1fr] md:gap-10"
+                className={`group grid scroll-mt-28 gap-6 rounded-[2rem] border border-border bg-surface p-3 sm:p-4 md:gap-10 ${
+                  i % 2 === 1 ? "md:grid-cols-[1fr_1.3fr]" : "md:grid-cols-[1.3fr_1fr]"
+                }`}
               >
                 {project.live ? (
                   <a
@@ -45,7 +47,7 @@ export function Work() {
                       i % 2 === 1 ? "md:order-2" : ""
                     }`}
                   >
-                    <ProjectScene mockup={project.mockup} live={project.live} />
+                    <ProjectScene mockup={project.mockup} live={project.live} title={project.title} />
                   </a>
                 ) : (
                   <div
@@ -53,7 +55,7 @@ export function Work() {
                       i % 2 === 1 ? "md:order-2" : ""
                     }`}
                   >
-                    <ProjectScene mockup={project.mockup} />
+                    <ProjectScene mockup={project.mockup} title={project.title} />
                   </div>
                 )}
 
@@ -62,7 +64,7 @@ export function Work() {
                     <span>
                       <span className="text-foreground">{String(i + 1).padStart(2, "0")}</span> / {project.year}
                     </span>
-                    <span>{project.duration}</span>
+                    {project.duration && <span>{project.duration}</span>}
                   </div>
 
                   <h3 className="mt-5 font-display text-3xl font-extrabold tracking-[-0.02em] text-foreground sm:text-4xl">

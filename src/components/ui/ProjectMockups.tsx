@@ -97,70 +97,57 @@ function SpendifyScreen() {
   );
 }
 
-function MagnusScreen() {
-  const cards = [
-    { title: "Solidity Audit", price: "0.12 ETH", from: "#8b5cf6", to: "#ec4899" },
-    { title: "Brand Identity", price: "0.08 ETH", from: "#f59e0b", to: "#ef4444" },
-    { title: "Next.js Build", price: "0.15 ETH", from: "#06b6d4", to: "#6366f1" },
-    { title: "3D Motion", price: "0.10 ETH", from: "#22c55e", to: "#14b8a6" },
-  ];
+// Stand-in for Queuely's landing page, shown until the live site loads.
+function QueuelyScreen() {
   return (
-    <svg viewBox="0 0 280 600" className="block h-full w-full" style={uiFont} aria-hidden>
+    <svg viewBox="0 0 640 400" className="block h-full w-full" style={uiFont} aria-hidden>
       <defs>
-        {cards.map((c, i) => (
-          <linearGradient key={i} id={`mgn-card-${i}`} x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stopColor={c.from} />
-            <stop offset="1" stopColor={c.to} />
-          </linearGradient>
-        ))}
-        <linearGradient id="mgn-cta" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stopColor="#8b5cf6" />
-          <stop offset="1" stopColor="#ec4899" />
-        </linearGradient>
+        <radialGradient id="qly-glow" cx="50%" cy="105%" r="75%">
+          <stop offset="0" stopColor="#ff6363" stopOpacity=".38" />
+          <stop offset="1" stopColor="#ff6363" stopOpacity="0" />
+        </radialGradient>
       </defs>
-      <rect width="280" height="600" fill="#0d0b14" />
-      <text x="24" y="34" fontSize="11" fontWeight="600" fill="#fff">9:41</text>
-      <rect x="226" y="25" width="22" height="10" rx="3" fill="none" stroke="#fff" strokeOpacity=".7" />
-      <rect x="228" y="27" width="14" height="6" rx="1.5" fill="#fff" />
+      <rect width="640" height="400" fill="#040506" />
+      <rect width="640" height="400" fill="url(#qly-glow)" />
 
-      <text x="20" y="78" fontSize="20" fontWeight="800" fill="#fff">Magnus</text>
-      <text x="20" y="94" fontSize="10" fill="#8f89a6">Skill Mart</text>
-      <rect x="160" y="62" width="100" height="28" rx="14" fill="url(#mgn-cta)" />
-      <text x="210" y="80" fontSize="9.5" fontWeight="700" textAnchor="middle" fill="#fff">Connect wallet</text>
+      <rect x="24" y="20" width="16" height="16" rx="5" fill="#ff6363" />
+      <text x="48" y="32.5" fontSize="12" fontWeight="700" fill="#fff">Queuely</text>
+      {["Features", "How it works", "Analytics"].map((item, i) => (
+        <text key={item} x={250 + i * 62} y="32" fontSize="9" fill="#9c9c9d">
+          {item}
+        </text>
+      ))}
+      <rect x="540" y="18" width="76" height="22" rx="11" fill="#fff" />
+      <text x="578" y="32.5" fontSize="9" fontWeight="600" textAnchor="middle" fill="#040506">Sign in</text>
 
-      <rect x="20" y="112" width="240" height="34" rx="12" fill="#1a1726" />
-      <circle cx="38" cy="129" r="5" fill="none" stroke="#6f6a86" strokeWidth="1.6" />
-      <text x="52" y="133" fontSize="10" fill="#6f6a86">Search skills</text>
+      <rect x="232" y="76" width="176" height="22" rx="11" fill="#fff" fillOpacity=".05" stroke="#fff" strokeOpacity=".1" />
+      <rect x="236" y="80" width="40" height="14" rx="7" fill="#ff6363" />
+      <text x="256" y="90" fontSize="7" fontWeight="700" textAnchor="middle" fill="#1a0a0a">NEW</text>
+      <text x="284" y="91" fontSize="8.5" fill="#cfcfd1">Token-gated waitlists</text>
 
-      {["All", "Dev", "Design", "Web3"].map((chip, i) => (
-        <g key={chip} transform={`translate(${20 + i * 58} 160)`}>
-          <rect width="50" height="24" rx="12" fill={i === 0 ? "#fff" : "#1a1726"} />
-          <text x="25" y="16" fontSize="9.5" fontWeight="600" textAnchor="middle" fill={i === 0 ? "#0d0b14" : "#b8b3cc"}>
-            {chip}
+      <text x="320" y="146" fontSize="34" fontWeight="500" textAnchor="middle" fill="#fff">Every launch starts</text>
+      <text x="320" y="184" fontSize="34" fontWeight="500" textAnchor="middle" fill="#fff">with a line.</text>
+      <text x="320" y="210" fontSize="10" textAnchor="middle" fill="#9c9c9d">
+        Build hype before you ship. Collect signups with branded, token-gated forms.
+      </text>
+
+      <rect x="232" y="228" width="92" height="28" rx="14" fill="#ff6363" />
+      <text x="278" y="246" fontSize="9.5" fontWeight="700" textAnchor="middle" fill="#1a0a0a">Get started</text>
+      <rect x="332" y="228" width="76" height="28" rx="14" fill="none" stroke="#fff" strokeOpacity=".22" />
+      <text x="370" y="246" fontSize="9.5" fontWeight="600" textAnchor="middle" fill="#fff">How it works</text>
+
+      {[0, 1, 2, 3, 4].map((i) => (
+        <g key={i} transform={`translate(${128 + i * 80} ${284 + Math.abs(i - 2) * 10})`}>
+          <rect width="68" height="84" rx="9" fill="#0b0c0e" stroke="#fff" strokeOpacity=".09" />
+          <text x="10" y="20" fontSize="7" letterSpacing="1" fill="#6a6b6c">TICKET</text>
+          <text x="10" y="42" fontSize="15" fontWeight="700" fill={i === 2 ? "#ff6363" : "#fff"}>
+            #{String(126 + i).padStart(4, "0")}
+          </text>
+          <line x1="8" x2="60" y1="56" y2="56" stroke="#fff" strokeOpacity=".15" strokeDasharray="3 3" />
+          <text x="10" y="72" fontSize="7" fill={i === 2 ? "#ff6363" : "#6a6b6c"}>
+            {i === 2 ? "NOW SERVING" : i < 2 ? "SERVED" : "IN LINE"}
           </text>
         </g>
-      ))}
-
-      {cards.map((card, i) => {
-        const x = 20 + (i % 2) * 124;
-        const y = 200 + Math.floor(i / 2) * 176;
-        return (
-          <g key={card.title} transform={`translate(${x} ${y})`}>
-            <rect width="116" height="164" rx="14" fill="#16131f" stroke="#262235" />
-            <rect x="8" y="8" width="100" height="92" rx="10" fill={`url(#mgn-card-${i})`} />
-            <circle cx="58" cy="54" r="20" fill="#fff" fillOpacity=".22" />
-            <path d="M58 40l12 14-12 14-12-14z" fill="#fff" fillOpacity=".85" />
-            <text x="10" y="120" fontSize="10" fontWeight="700" fill="#fff">{card.title}</text>
-            <text x="10" y="136" fontSize="8.5" fill="#8f89a6">Verified skill</text>
-            <circle cx="78" cy="133" r="4" fill="#22c55e" />
-            <text x="10" y="153" fontSize="9" fontWeight="700" fill="#c4b5fd">{card.price}</text>
-          </g>
-        );
-      })}
-
-      <rect x="20" y="548" width="240" height="36" rx="18" fill="#1a1726" />
-      {[0, 1, 2, 3].map((i) => (
-        <circle key={i} cx={56 + i * 56} cy="566" r={i === 0 ? 6 : 5} fill={i === 0 ? "#fff" : "#4b4663"} />
       ))}
     </svg>
   );
@@ -179,37 +166,42 @@ function Laptop({ children }: { children: React.ReactNode }) {
   );
 }
 
-function DashboardScene({ live }: { live?: string }) {
+// The laptop, centred in a scene, showing the live site (or the illustration until it loads).
+function SceneLaptop({ live, title, screen }: { live?: string; title: string; screen: React.ReactNode }) {
+  return (
+    <div className="absolute left-1/2 top-1/2 w-[74%] -translate-x-1/2 -translate-y-[44%] transition-transform duration-700 group-hover:-translate-y-[47%]">
+      <Laptop>
+        {live ? <LivePreview url={live} title={`Live preview of ${title}`} fallback={screen} /> : screen}
+      </Laptop>
+    </div>
+  );
+}
+
+function DashboardScene({ live, title }: { live?: string; title: string }) {
   return (
     <div className="absolute inset-0 overflow-hidden bg-[linear-gradient(150deg,#e6f7ec_0%,#bde8cb_100%)]">
       <div className="absolute inset-0 bg-[radial-gradient(rgba(21,128,61,0.2)_1.2px,transparent_1.2px)] [background-size:18px_18px]" />
       <div className="absolute -right-[12%] -top-[25%] aspect-square w-[60%] rounded-full bg-white/50 blur-2xl" />
-      <div className="absolute left-1/2 top-1/2 w-[74%] -translate-x-1/2 -translate-y-[44%] transition-transform duration-700 group-hover:-translate-y-[47%]">
-        <Laptop>
-          {live ? (
-            <LivePreview url={live} title="Live preview of Spendify" fallback={<SpendifyScreen />} />
-          ) : (
-            <SpendifyScreen />
-          )}
-        </Laptop>
-      </div>
-      {live ? (
-        <LiveBadge url={live} />
-      ) : (
-        <div className="animate-bob absolute left-[5%] top-[9%] rounded-2xl bg-white px-3 py-2 shadow-[0_14px_30px_-12px_rgba(21,128,61,0.45)] sm:left-[7%] sm:top-[11%]">
-          <p className="text-[9px] font-medium text-neutral-500 sm:text-[11px]">Savings goal</p>
-          <p className="font-display text-sm font-bold text-neutral-900 sm:text-lg">
-            $2,050 <span className="text-[10px] text-green-600 sm:text-xs">+8%</span>
-          </p>
-        </div>
-      )}
+      <SceneLaptop live={live} title={title} screen={<SpendifyScreen />} />
+      {live && <LiveBadge url={live} />}
+    </div>
+  );
+}
+
+function WaitlistScene({ live, title }: { live?: string; title: string }) {
+  return (
+    <div className="absolute inset-0 overflow-hidden bg-[radial-gradient(120%_90%_at_50%_0%,#2b1214_0%,#0b0c0e_55%,#040506_100%)]">
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.045)_1px,transparent_1px)] [background-size:28px_28px]" />
+      <div className="absolute -bottom-[35%] left-1/2 aspect-square w-[70%] -translate-x-1/2 rounded-full bg-[#ff6363]/25 blur-3xl" />
+      <SceneLaptop live={live} title={title} screen={<QueuelyScreen />} />
+      {live && <LiveBadge url={live} />}
     </div>
   );
 }
 
 function LiveBadge({ url }: { url: string }) {
   return (
-    <div className="absolute left-[4%] top-[6%] flex max-w-[90%] items-center gap-2 rounded-full bg-white/90 py-1.5 pl-2.5 pr-3 text-[10px] font-semibold text-neutral-900 shadow-[0_10px_24px_-12px_rgba(21,128,61,0.55)] backdrop-blur-md sm:text-xs">
+    <div className="absolute left-[4%] top-[6%] flex max-w-[90%] items-center gap-2 rounded-full bg-white/90 py-1.5 pl-2.5 pr-3 text-[10px] font-semibold text-neutral-900 shadow-[0_10px_24px_-12px_rgba(0,0,0,0.45)] backdrop-blur-md sm:text-xs">
       <span className="relative flex h-2 w-2 shrink-0">
         <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-70 motion-reduce:animate-none" />
         <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
@@ -220,36 +212,10 @@ function LiveBadge({ url }: { url: string }) {
   );
 }
 
-function MarketplaceScene() {
-  return (
-    <div className="absolute inset-0 overflow-hidden bg-[radial-gradient(120%_90%_at_75%_0%,#43307a_0%,#1a1330_55%,#0f0b1c_100%)]">
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:28px_28px]" />
-      <div className="absolute -left-[10%] bottom-[-20%] aspect-square w-[55%] rounded-full bg-fuchsia-500/30 blur-3xl" />
-      <div className="absolute right-[5%] top-[-10%] aspect-square w-[40%] rounded-full bg-violet-500/30 blur-3xl" />
-      <div className="absolute left-1/2 top-1/2 w-[30%] -translate-x-1/2 -translate-y-1/2 -rotate-[8deg] transition-transform duration-700 group-hover:-rotate-[4deg]">
-        <div className="rounded-[1.4rem] bg-[#111014] p-[4%] shadow-[0_40px_60px_-20px_rgba(0,0,0,0.8),inset_0_0_0_1px_rgba(255,255,255,0.1)] sm:rounded-[1.8rem]">
-          <div className="relative aspect-[280/600] overflow-hidden rounded-[1.05rem] sm:rounded-[1.4rem]">
-            <MagnusScreen />
-            <span className="absolute left-1/2 top-[1.6%] h-[3.2%] w-[32%] -translate-x-1/2 rounded-full bg-black" />
-          </div>
-        </div>
-      </div>
-      <div className="animate-bob absolute right-[6%] top-[14%] flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[10px] font-semibold text-white backdrop-blur-md sm:text-xs">
-        <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-        Wallet connected
-      </div>
-      <div
-        className="animate-bob absolute bottom-[12%] left-[6%] w-[24%] rotate-[-6deg] rounded-xl border border-white/10 bg-[#16131f] p-1.5 shadow-2xl sm:left-[9%]"
-        style={{ animationDelay: "-2s" }}
-      >
-        <div className="aspect-square rounded-lg bg-gradient-to-br from-violet-500 to-pink-500" />
-        <p className="mt-1.5 truncate text-[8px] font-bold text-white sm:text-[10px]">Solidity Audit</p>
-        <p className="text-[8px] font-bold text-violet-300 sm:text-[10px]">0.12 ETH</p>
-      </div>
-    </div>
+export function ProjectScene({ mockup, live, title }: { mockup: ProjectMockup; live?: string; title: string }) {
+  return mockup === "dashboard" ? (
+    <DashboardScene live={live} title={title} />
+  ) : (
+    <WaitlistScene live={live} title={title} />
   );
-}
-
-export function ProjectScene({ mockup, live }: { mockup: ProjectMockup; live?: string }) {
-  return mockup === "dashboard" ? <DashboardScene live={live} /> : <MarketplaceScene />;
 }

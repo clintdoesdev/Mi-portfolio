@@ -138,13 +138,13 @@ export const alsoFamiliar = [
   "PostgreSQL",
 ];
 
-export type ProjectMockup = "dashboard" | "marketplace";
+export type ProjectMockup = "dashboard" | "waitlist";
 
 export const projects: {
   title: string;
   subtitle: string;
   tags: string[];
-  duration: string;
+  duration?: string;
   year: string;
   description: string;
   highlights: string[];
@@ -171,18 +171,19 @@ export const projects: {
     repo: "https://github.com/clintdoesdev/spendify",
   },
   {
-    title: "Magnus Skill Mart",
-    subtitle: "Web3 skills marketplace",
-    tags: ["Web3 frontend", "Live demo"],
-    duration: "2 weeks",
-    year: "2025",
+    title: "Queuely",
+    subtitle: "Waitlist management SaaS",
+    tags: ["Full-stack SaaS", "Live demo"],
+    year: "2026",
     description:
-      "An NFT-inspired Web3 marketplace for skills and digital services, with wallet integration, mobile-responsive design, and a premium dark UI.",
+      "A production-grade waitlist platform. Teams launch branded, token-gated signup forms, then manage, analyse, and export their queue from one dashboard.",
     highlights: [
-      "Web3 wallet connection and on-chain skill verification",
-      "NFT-style skill card marketplace with filtering",
+      "Single-use invite tokens, a drag-and-drop form builder with seven field types, and per-project branding",
+      "Admin dashboard with signup analytics, bulk actions, CSV export, team roles, 2FA, and a full audit log",
     ],
-    mockup: "marketplace",
+    mockup: "waitlist",
+    live: "https://queuely-rose.vercel.app/",
+    repo: "https://github.com/clintdoesdev/Queuely",
   },
 ];
 

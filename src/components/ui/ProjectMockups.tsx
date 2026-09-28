@@ -1,3 +1,4 @@
+import { LivePreview } from "@/components/ui/LivePreview";
 import type { ProjectMockup } from "@/lib/data";
 
 const uiFont = { fontFamily: "var(--font-inter), system-ui, sans-serif" };
@@ -178,22 +179,43 @@ function Laptop({ children }: { children: React.ReactNode }) {
   );
 }
 
-function DashboardScene() {
+function DashboardScene({ live }: { live?: string }) {
   return (
     <div className="absolute inset-0 overflow-hidden bg-[linear-gradient(150deg,#e6f7ec_0%,#bde8cb_100%)]">
       <div className="absolute inset-0 bg-[radial-gradient(rgba(21,128,61,0.2)_1.2px,transparent_1.2px)] [background-size:18px_18px]" />
       <div className="absolute -right-[12%] -top-[25%] aspect-square w-[60%] rounded-full bg-white/50 blur-2xl" />
       <div className="absolute left-1/2 top-1/2 w-[74%] -translate-x-1/2 -translate-y-[44%] transition-transform duration-700 group-hover:-translate-y-[47%]">
         <Laptop>
-          <SpendifyScreen />
+          {live ? (
+            <LivePreview url={live} title="Live preview of Spendify" fallback={<SpendifyScreen />} />
+          ) : (
+            <SpendifyScreen />
+          )}
         </Laptop>
       </div>
-      <div className="animate-bob absolute left-[5%] top-[9%] rounded-2xl bg-white px-3 py-2 shadow-[0_14px_30px_-12px_rgba(21,128,61,0.45)] sm:left-[7%] sm:top-[11%]">
-        <p className="text-[9px] font-medium text-neutral-500 sm:text-[11px]">Savings goal</p>
-        <p className="font-display text-sm font-bold text-neutral-900 sm:text-lg">
-          $2,050 <span className="text-[10px] text-green-600 sm:text-xs">+8%</span>
-        </p>
-      </div>
+      {live ? (
+        <LiveBadge url={live} />
+      ) : (
+        <div className="animate-bob absolute left-[5%] top-[9%] rounded-2xl bg-white px-3 py-2 shadow-[0_14px_30px_-12px_rgba(21,128,61,0.45)] sm:left-[7%] sm:top-[11%]">
+          <p className="text-[9px] font-medium text-neutral-500 sm:text-[11px]">Savings goal</p>
+          <p className="font-display text-sm font-bold text-neutral-900 sm:text-lg">
+            $2,050 <span className="text-[10px] text-green-600 sm:text-xs">+8%</span>
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function LiveBadge({ url }: { url: string }) {
+  return (
+    <div className="absolute left-[4%] top-[6%] flex max-w-[90%] items-center gap-2 rounded-full bg-white/90 py-1.5 pl-2.5 pr-3 text-[10px] font-semibold text-neutral-900 shadow-[0_10px_24px_-12px_rgba(21,128,61,0.55)] backdrop-blur-md sm:text-xs">
+      <span className="relative flex h-2 w-2 shrink-0">
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-70 motion-reduce:animate-none" />
+        <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+      </span>
+      Live
+      <span className="truncate font-mono font-normal text-neutral-500">{new URL(url).host}</span>
     </div>
   );
 }
@@ -228,6 +250,6 @@ function MarketplaceScene() {
   );
 }
 
-export function ProjectScene({ mockup }: { mockup: ProjectMockup }) {
-  return mockup === "dashboard" ? <DashboardScene /> : <MarketplaceScene />;
+export function ProjectScene({ mockup, live }: { mockup: ProjectMockup; live?: string }) {
+  return mockup === "dashboard" ? <DashboardScene live={live} /> : <MarketplaceScene />;
 }

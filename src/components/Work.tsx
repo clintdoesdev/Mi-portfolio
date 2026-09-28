@@ -1,7 +1,7 @@
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { ProjectScene } from "@/components/ui/ProjectMockups";
 import { Reveal } from "@/components/ui/Reveal";
-import { ArrowUpRight } from "@/components/ui/SocialIcons";
+import { ArrowUpRight, GitHubIcon } from "@/components/ui/SocialIcons";
 import { projects } from "@/lib/data";
 
 function slugify(title: string) {
@@ -35,13 +35,27 @@ export function Work() {
                 id={`work-${slugify(project.title)}`}
                 className="group grid scroll-mt-28 gap-6 rounded-[2rem] border border-border bg-surface p-3 sm:p-4 md:grid-cols-[1.3fr_1fr] md:gap-10"
               >
-                <div
-                  className={`relative aspect-[4/3] overflow-hidden rounded-[1.5rem] ${
-                    i % 2 === 1 ? "md:order-2" : ""
-                  }`}
-                >
-                  <ProjectScene mockup={project.mockup} />
-                </div>
+                {project.live ? (
+                  <a
+                    href={project.live}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`Open the live ${project.title} site`}
+                    className={`relative block aspect-[4/3] overflow-hidden rounded-[1.5rem] ${
+                      i % 2 === 1 ? "md:order-2" : ""
+                    }`}
+                  >
+                    <ProjectScene mockup={project.mockup} live={project.live} />
+                  </a>
+                ) : (
+                  <div
+                    className={`relative aspect-[4/3] overflow-hidden rounded-[1.5rem] ${
+                      i % 2 === 1 ? "md:order-2" : ""
+                    }`}
+                  >
+                    <ProjectScene mockup={project.mockup} />
+                  </div>
+                )}
 
                 <div className="flex flex-col px-2 pb-3 md:px-2 md:py-6">
                   <div className="flex items-center justify-between font-mono text-xs text-muted">
@@ -73,22 +87,39 @@ export function Work() {
                     ))}
                   </ul>
 
+                  {(project.live || project.repo) && (
+                    <div className="mt-6 flex flex-wrap items-center gap-2.5">
+                      {project.live && (
+                        <a
+                          href={project.live}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-1.5 rounded-xl bg-accent px-4 py-2.5 text-sm font-bold text-ink shadow-[0_4px_0_#b39800] transition-[transform,box-shadow] hover:translate-y-0.5 hover:shadow-[0_2px_0_#b39800]"
+                        >
+                          Live site
+                          <ArrowUpRight className="h-4 w-4" />
+                        </a>
+                      )}
+                      {project.repo && (
+                        <a
+                          href={project.repo}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-2 rounded-xl border border-border bg-surface px-4 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-foreground/50"
+                        >
+                          <GitHubIcon className="h-4 w-4" />
+                          GitHub repo
+                        </a>
+                      )}
+                    </div>
+                  )}
+
                   <div className="mt-auto flex flex-wrap items-center gap-2 pt-6">
                     {project.tags.map((tag) => (
                       <span key={tag} className="rounded-lg bg-background-2 px-2.5 py-1 font-mono text-[11px] text-muted">
                         {tag}
                       </span>
                     ))}
-                    {project.href && (
-                      <a
-                        href={project.href}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="ml-auto inline-flex items-center gap-1 text-sm font-semibold text-foreground"
-                      >
-                        Visit <ArrowUpRight className="h-4 w-4" />
-                      </a>
-                    )}
                   </div>
                 </div>
               </article>

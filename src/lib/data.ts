@@ -149,7 +149,10 @@ export const projects: {
   description: string;
   highlights: string[];
   mockup: ProjectMockup;
-  href?: string;
+  /** Deployed site: shown as a live preview and a "Live site" button. */
+  live?: string;
+  /** Source code: shown as a "GitHub repo" button. */
+  repo?: string;
 }[] = [
   {
     title: "Spendify",
@@ -164,6 +167,8 @@ export const projects: {
       "Interactive analytics using Recharts for category and monthly trend visualisation",
     ],
     mockup: "dashboard",
+    live: "https://thespendify.vercel.app/",
+    repo: "https://github.com/clintdoesdev/spendify",
   },
   {
     title: "Magnus Skill Mart",

@@ -7,8 +7,10 @@ import type { ReactNode } from "react";
 const FRAME_WIDTH = 1280;
 const FRAME_HEIGHT = 800;
 
-// Embeds a live, non-interactive view of a deployed site. The fallback shows
-// until the page has loaded, so there's never an empty screen.
+// Embeds a live, non-interactive view of a deployed site. Scripts are disabled
+// in the frame: the site's current server-rendered page still shows, but none of
+// its code runs, so three embedded apps can't slow down scrolling here. The
+// fallback shows until the page has loaded, so there's never an empty screen.
 export function LivePreview({ url, title, fallback }: { url: string; title: string; fallback: ReactNode }) {
   const boxRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(0);
@@ -35,7 +37,7 @@ export function LivePreview({ url, title, fallback }: { url: string; title: stri
           title={title}
           loading="lazy"
           tabIndex={-1}
-          sandbox="allow-scripts allow-same-origin"
+          sandbox="allow-same-origin"
           onLoad={() => setLoaded(true)}
           className="pointer-events-none absolute left-0 top-0 origin-top-left border-0 transition-opacity duration-500"
           style={{

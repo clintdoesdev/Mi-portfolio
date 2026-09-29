@@ -272,7 +272,7 @@ function CardsScene({ live, title }: { live?: string; title: string }) {
 
 function LiveBadge({ url }: { url: string }) {
   return (
-    <div className="absolute left-[4%] top-[6%] flex max-w-[90%] items-center gap-2 rounded-full bg-white/90 py-1.5 pl-2.5 pr-3 text-[10px] font-semibold text-neutral-900 shadow-[0_10px_24px_-12px_rgba(0,0,0,0.45)] backdrop-blur-md sm:text-xs">
+    <div className="absolute left-[4%] top-[6%] flex max-w-[90%] items-center gap-2 rounded-full bg-white py-1.5 pl-2.5 pr-3 text-[10px] font-semibold text-neutral-900 shadow-[0_10px_24px_-12px_rgba(0,0,0,0.45)] sm:text-xs">
       <span className="relative flex h-2 w-2 shrink-0">
         <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-70 motion-reduce:animate-none" />
         <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />

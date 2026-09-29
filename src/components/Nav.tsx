@@ -8,7 +8,10 @@ import { ArrowUpRight } from "@/components/ui/SocialIcons";
 import { navLinks, site } from "@/lib/data";
 import { smoothScrollToHash } from "@/lib/scroll";
 
-const glass = "shadow-soft pointer-events-auto border border-border/70 bg-surface/80 backdrop-blur-xl";
+// Frosted glass only from md up: a blurred backdrop on a fixed bar is re-rendered on
+// every scroll frame, which phones can't afford, so they get a solid bar instead.
+const glass =
+  "shadow-soft pointer-events-auto border border-border/70 bg-surface md:bg-surface/80 md:backdrop-blur-xl";
 
 export function Nav() {
   const [active, setActive] = useState("");

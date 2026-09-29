@@ -106,12 +106,21 @@ export function Keyboard() {
   // Ghost typing when nobody is playing with it.
   useEffect(() => {
     if (reduceMotion) return;
+    // Pause while the visitor is scrolling so a key press never repaints mid-scroll.
+    let lastScroll = 0;
+    const onScroll = () => {
+      lastScroll = Date.now();
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
     const id = window.setInterval(() => {
-      if (!visible.current || document.hidden) return;
+      if (!visible.current || document.hidden || Date.now() - lastScroll < 800) return;
       if (Date.now() - lastUserPress.current < 5000) return;
       tap(Math.floor(Math.random() * keys.length));
     }, 1800);
-    return () => window.clearInterval(id);
+    return () => {
+      window.clearInterval(id);
+      window.removeEventListener("scroll", onScroll);
+    };
   }, [keys.length, reduceMotion, tap]);
 
   return (

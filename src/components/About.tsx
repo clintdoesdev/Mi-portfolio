@@ -176,7 +176,7 @@ export function About() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-10% 0px" }}
             transition={{ type: "spring", stiffness: 140, damping: 18, delay: 0.3 }}
-            className="shadow-soft flex w-full max-w-sm gap-3 rounded-3xl border border-border bg-surface/90 p-4 backdrop-blur-xl transition-transform hover:-translate-y-1"
+            className="shadow-soft flex w-full max-w-sm gap-3 rounded-3xl border border-border bg-surface p-4 transition-transform hover:-translate-y-1"
           >
             <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-neutral-950 text-white">
               <TikTokIcon className="h-5 w-5" />

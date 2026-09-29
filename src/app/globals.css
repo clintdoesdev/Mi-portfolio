@@ -175,7 +175,12 @@ section[id] {
   mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, black 25%, transparent 75%);
 }
 
-/* ---- Hero headline: letters drop in one by one ------------------------- */
+/* ---- Entrance animations ----------------------------------------------------
+   These use `backwards` fill and end on the element's natural style, so once they
+   finish the browser drops them. Holding the last frame with `forwards` kept every
+   letter and keycap as a live animated layer, which made scrolling stutter. */
+
+/* Hero headline: letters drop in one by one */
 @keyframes char-in {
   0% {
     opacity: 0;
@@ -193,8 +198,7 @@ section[id] {
 
 .char {
   display: inline-block;
-  opacity: 0;
-  animation: char-in 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation: char-in 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
   animation-delay: calc(var(--i) * 40ms + 150ms);
 }
 
@@ -210,8 +214,7 @@ section[id] {
 }
 
 .fade-up {
-  opacity: 0;
-  animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 
 /* Highlighter swipe behind a word. */
@@ -238,8 +241,8 @@ section[id] {
   border-radius: 0.06em;
   background: var(--accent);
   transform-origin: left center;
-  transform: scaleX(0) rotate(-1.5deg);
-  animation: marker-in 0.65s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  transform: rotate(-1.5deg);
+  animation: marker-in 0.65s cubic-bezier(0.65, 0, 0.35, 1) backwards;
   animation-delay: var(--marker-delay, 0.45s);
 }
 
@@ -323,8 +326,7 @@ section[id] {
 }
 
 .key-in {
-  opacity: 0;
-  animation: key-in 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation: key-in 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
   animation-delay: calc(var(--k) * 28ms + 700ms);
 }
 
@@ -338,7 +340,7 @@ section[id] {
 }
 
 .typing {
-  animation: typing 0.45s steps(22, end) both;
+  animation: typing 0.45s steps(22, end) backwards;
 }
 
 @keyframes led {
@@ -353,7 +355,7 @@ section[id] {
 }
 
 .led-flash {
-  animation: led 0.5s ease-out forwards;
+  animation: led 0.5s ease-out;
 }
 
 @media (prefers-reduced-motion: reduce) {

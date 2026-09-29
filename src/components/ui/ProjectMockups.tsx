@@ -153,6 +153,65 @@ function QueuelyScreen() {
   );
 }
 
+// Stand-in for FrameSound's landing page, shown until the live site loads.
+function FrameSoundScreen() {
+  const cards = [
+    { from: "#f472b6", to: "#7c3aed" },
+    { from: "#2ee6a6", to: "#0e7490" },
+    { from: "#fbbf24", to: "#ea580c" },
+  ];
+  return (
+    <svg viewBox="0 0 640 400" className="block h-full w-full" style={uiFont} aria-hidden>
+      <defs>
+        <linearGradient id="fs-headline" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0.1" stopColor="#f5f5f4" />
+          <stop offset="0.55" stopColor="#7df0c6" />
+          <stop offset="1" stopColor="#f472b6" />
+        </linearGradient>
+        <radialGradient id="fs-glow" cx="50%" cy="0%" r="70%">
+          <stop offset="0" stopColor="#2ee6a6" stopOpacity=".22" />
+          <stop offset="1" stopColor="#2ee6a6" stopOpacity="0" />
+        </radialGradient>
+        {cards.map((c, i) => (
+          <linearGradient key={i} id={`fs-art-${i}`} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor={c.from} />
+            <stop offset="1" stopColor={c.to} />
+          </linearGradient>
+        ))}
+      </defs>
+      <rect width="640" height="400" fill="#0a0a0c" />
+      <rect width="640" height="400" fill="url(#fs-glow)" />
+
+      <circle cx="32" cy="28" r="8" fill="#2ee6a6" />
+      <text x="48" y="32.5" fontSize="12" fontWeight="700" fill="#f5f5f4">FrameSound</text>
+      <rect x="532" y="17" width="84" height="22" rx="11" fill="#fff" fillOpacity=".08" />
+      <text x="574" y="31.5" fontSize="9" fontWeight="600" textAnchor="middle" fill="#f5f5f4">Batch export</text>
+
+      <text x="320" y="96" fontSize="34" fontWeight="700" textAnchor="middle" fill="#f5f5f4">Turn Spotify</text>
+      <text x="320" y="134" fontSize="34" fontWeight="700" textAnchor="middle" fill="url(#fs-headline)">into art.</text>
+      <text x="320" y="158" fontSize="10" textAnchor="middle" fill="#f5f5f4" fillOpacity=".68">
+        Paste a track link to generate a beautiful shareable card in seconds.
+      </text>
+
+      <rect x="180" y="174" width="280" height="30" rx="15" fill="#fff" fillOpacity=".06" stroke="#fff" strokeOpacity=".1" />
+      <text x="198" y="193" fontSize="9.5" fill="#f5f5f4" fillOpacity=".44">Search or paste a Spotify link…</text>
+      <rect x="400" y="178" width="56" height="22" rx="11" fill="#2ee6a6" />
+      <text x="428" y="192.5" fontSize="9" fontWeight="700" textAnchor="middle" fill="#04140d">Paste</text>
+
+      {cards.map((_, i) => (
+        <g key={i} transform={`translate(${156 + i * 116} ${226 + (i === 1 ? 0 : 14)}) rotate(${(i - 1) * 6} 50 70)`}>
+          <rect width="100" height="148" rx="12" fill="#141417" stroke="#fff" strokeOpacity=".1" />
+          <rect x="8" y="8" width="84" height="84" rx="8" fill={`url(#fs-art-${i})`} />
+          <rect x="10" y="104" width="56" height="7" rx="3.5" fill="#f5f5f4" fillOpacity=".85" />
+          <rect x="10" y="117" width="38" height="6" rx="3" fill="#f5f5f4" fillOpacity=".4" />
+          <rect x="10" y="132" width="80" height="3" rx="1.5" fill="#fff" fillOpacity=".12" />
+          <rect x="10" y="132" width={30 + i * 14} height="3" rx="1.5" fill="#2ee6a6" />
+        </g>
+      ))}
+    </svg>
+  );
+}
+
 function Laptop({ children }: { children: React.ReactNode }) {
   return (
     <div className="w-full">
@@ -199,6 +258,18 @@ function WaitlistScene({ live, title }: { live?: string; title: string }) {
   );
 }
 
+function CardsScene({ live, title }: { live?: string; title: string }) {
+  return (
+    <div className="absolute inset-0 overflow-hidden bg-[radial-gradient(120%_90%_at_50%_0%,#0f2a22_0%,#0c0c0f_55%,#0a0a0c_100%)]">
+      <div className="absolute inset-0 bg-[radial-gradient(rgba(46,230,166,0.16)_1.2px,transparent_1.2px)] [background-size:20px_20px]" />
+      <div className="absolute -left-[15%] -bottom-[30%] aspect-square w-[55%] rounded-full bg-[#2ee6a6]/20 blur-3xl" />
+      <div className="absolute -right-[15%] -top-[25%] aspect-square w-[50%] rounded-full bg-[#f472b6]/20 blur-3xl" />
+      <SceneLaptop live={live} title={title} screen={<FrameSoundScreen />} />
+      {live && <LiveBadge url={live} />}
+    </div>
+  );
+}
+
 function LiveBadge({ url }: { url: string }) {
   return (
     <div className="absolute left-[4%] top-[6%] flex max-w-[90%] items-center gap-2 rounded-full bg-white/90 py-1.5 pl-2.5 pr-3 text-[10px] font-semibold text-neutral-900 shadow-[0_10px_24px_-12px_rgba(0,0,0,0.45)] backdrop-blur-md sm:text-xs">
@@ -212,10 +283,13 @@ function LiveBadge({ url }: { url: string }) {
   );
 }
 
+const scenes: Record<ProjectMockup, (props: { live?: string; title: string }) => React.ReactNode> = {
+  dashboard: DashboardScene,
+  waitlist: WaitlistScene,
+  cards: CardsScene,
+};
+
 export function ProjectScene({ mockup, live, title }: { mockup: ProjectMockup; live?: string; title: string }) {
-  return mockup === "dashboard" ? (
-    <DashboardScene live={live} title={title} />
-  ) : (
-    <WaitlistScene live={live} title={title} />
-  );
+  const Scene = scenes[mockup];
+  return <Scene live={live} title={title} />;
 }

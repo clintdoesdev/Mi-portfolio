@@ -138,7 +138,7 @@ export const alsoFamiliar = [
   "PostgreSQL",
 ];
 
-export type ProjectMockup = "dashboard" | "waitlist";
+export type ProjectMockup = "dashboard" | "waitlist" | "cards";
 
 export const projects: {
   title: string;
@@ -184,6 +184,21 @@ export const projects: {
     mockup: "waitlist",
     live: "https://queuely-rose.vercel.app/",
     repo: "https://github.com/clintdoesdev/Queuely",
+  },
+  {
+    title: "FrameSound",
+    subtitle: "Spotify card generator",
+    tags: ["Full-stack web app", "Live demo"],
+    year: "2026",
+    description:
+      "Paste a Spotify track link, pick a style, quote a lyric, and export a shareable HD card — no login required.",
+    highlights: [
+      "Seven card presets, including real WebGL liquid glass that re-tints to each album's colours",
+      "Track data and lyrics fetched server-side, a 30-second audio preview, and PNG/JPG export at up to 3× scale",
+    ],
+    mockup: "cards",
+    live: "https://frame-sound.vercel.app/",
+    repo: "https://github.com/clintdoesdev/FrameSound",
   },
 ];
 

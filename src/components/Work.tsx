@@ -139,7 +139,7 @@ export function Work() {
                 </span>
                 <div>
                   <p className="font-mono text-xs text-muted">
-                    <span className="text-foreground">03</span> / coming soon
+                    <span className="text-foreground">{String(projects.length + 1).padStart(2, "0")}</span> / coming soon
                   </p>
                   <p className="mt-1 font-display text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
                     Your product could be next.

@@ -6,9 +6,15 @@ import photo from "../../public/images/clinton-photo.jpg";
 import { Counter } from "@/components/ui/Counter";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
-import { TikTokIcon } from "@/components/ui/SocialIcons";
-import { approach, heroBio, site, stats, tiktokBlurb } from "@/lib/data";
+import { InstagramIcon, TikTokIcon, XIcon } from "@/components/ui/SocialIcons";
+import { approach, heroBio, site, socialCards, stats } from "@/lib/data";
 import { useMediaQuery } from "@/lib/useMediaQuery";
+
+const socialIcons = {
+  instagram: <InstagramIcon className="h-5 w-5" />,
+  x: <XIcon className="h-5 w-5" />,
+  tiktok: <TikTokIcon className="h-5 w-5" />,
+};
 
 // A conference-style pass on a lanyard. Mouse users can tug it; it swings back.
 function DevPass() {
@@ -165,31 +171,42 @@ export function About() {
           </Reveal>
         </div>
 
-        <div className="relative flex flex-col items-center gap-10 lg:sticky lg:top-0 lg:-mt-48">
+        <div className="relative flex flex-col items-center gap-10 lg:-mt-48">
           <DevPass />
 
-          <motion.a
-            href={tiktokBlurb.href}
-            target="_blank"
-            rel="noreferrer"
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "0px 0px 12% 0px" }}
-            transition={{ type: "spring", stiffness: 320, damping: 28, delay: 0.05 }}
-            className="shadow-soft flex w-full max-w-sm gap-3 rounded-3xl border border-border bg-surface p-4 transition-transform hover:-translate-y-1"
-          >
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-neutral-950 text-white">
-              <TikTokIcon className="h-5 w-5" />
-            </span>
-            <span className="min-w-0">
-              <span className="flex items-center justify-between text-xs text-muted">
-                <span className="font-semibold uppercase tracking-wide">TikTok</span>
-                <span>now</span>
-              </span>
-              <span className="mt-0.5 block text-sm font-semibold text-foreground">{tiktokBlurb.handle}</span>
-              <span className="mt-0.5 block text-sm leading-snug text-muted">{tiktokBlurb.text}</span>
-            </span>
-          </motion.a>
+          <div className="flex w-full max-w-sm flex-col gap-3">
+            {socialCards.map((card, i) => (
+              <motion.a
+                key={card.network}
+                href={card.href}
+                target="_blank"
+                rel="noreferrer"
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "0px 0px 12% 0px" }}
+                transition={{ type: "spring", stiffness: 320, damping: 28, delay: 0.05 + i * 0.06 }}
+                className="shadow-soft flex gap-3 rounded-3xl border border-border bg-surface p-4 transition-transform hover:-translate-y-1"
+              >
+                <span
+                  className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl text-white ${
+                    card.network === "instagram"
+                      ? "bg-[linear-gradient(45deg,#f9a03f,#e1306c_55%,#833ab4)]"
+                      : "bg-neutral-950"
+                  }`}
+                >
+                  {socialIcons[card.network]}
+                </span>
+                <span className="min-w-0">
+                  <span className="flex items-center justify-between text-xs text-muted">
+                    <span className="font-semibold uppercase tracking-wide">{card.label}</span>
+                    <span>now</span>
+                  </span>
+                  <span className="mt-0.5 block text-sm font-semibold text-foreground">{card.handle}</span>
+                  <span className="mt-0.5 block text-sm leading-snug text-muted">{card.text}</span>
+                </span>
+              </motion.a>
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -1,12 +1,13 @@
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { Reveal } from "@/components/ui/Reveal";
-import { MailIcon, TikTokIcon, XIcon } from "@/components/ui/SocialIcons";
+import { InstagramIcon, MailIcon, TikTokIcon, XIcon } from "@/components/ui/SocialIcons";
 import { Terminal, type TerminalLine } from "@/components/ui/Terminal";
 import { Typewriter } from "@/components/ui/Typewriter";
 import { ctaWords, site, stats } from "@/lib/data";
 
 const socials = [
+  { label: "Instagram", href: site.instagram, icon: <InstagramIcon className="h-4 w-4" /> },
   { label: "X", href: site.x, icon: <XIcon className="h-4 w-4" /> },
   { label: "TikTok", href: site.tiktok, icon: <TikTokIcon className="h-4 w-4" /> },
   { label: "Email", href: `mailto:${site.email}`, icon: <MailIcon className="h-4 w-4" /> },

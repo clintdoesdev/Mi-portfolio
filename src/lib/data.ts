@@ -5,6 +5,7 @@ export const site = {
   email: "clintdoesdev@gmail.com",
   x: "https://x.com/clintdoesdev",
   tiktok: "https://tiktok.com/@clintdoesdev",
+  instagram: "https://instagram.com/clintdoesdev",
   available: true,
   location: "Remote · Worldwide",
 };
@@ -28,11 +29,35 @@ export const approach = {
   promise: ["Clean code", "Fast queries", "Smooth UX", "On-time delivery"],
 };
 
-export const tiktokBlurb = {
-  handle: "@clintdoesdev on TikTok",
-  text: "Short-form history and creative content. Building on both screens — the code editor and the camera.",
-  href: site.tiktok,
-};
+export const socialCards: {
+  network: "instagram" | "x" | "tiktok";
+  label: string;
+  handle: string;
+  text: string;
+  href: string;
+}[] = [
+  {
+    network: "instagram",
+    label: "Instagram",
+    handle: "@clintdoesdev on Instagram",
+    text: "Follow along for updates and behind-the-scenes.",
+    href: site.instagram,
+  },
+  {
+    network: "x",
+    label: "X",
+    handle: "@ClintDoesDev on X",
+    text: "I build & ship web apps for businesses, startups and founders.",
+    href: site.x,
+  },
+  {
+    network: "tiktok",
+    label: "TikTok",
+    handle: "@clintdoesdev on TikTok",
+    text: "Short-form history and creative content. Building on both screens — the code editor and the camera.",
+    href: site.tiktok,
+  },
+];
 
 export const services = [
   "Landing Pages",

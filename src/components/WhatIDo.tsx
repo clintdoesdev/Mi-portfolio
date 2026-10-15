@@ -28,10 +28,10 @@ function SkillTile({ skill, index }: { skill: (typeof skills)[number]; index: nu
 
   return (
     <motion.li
-      initial={{ opacity: 0, y: 30, scale: 0.9 }}
+      initial={{ opacity: 0, y: 14, scale: 0.96 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, margin: "-8% 0px" }}
-      transition={{ type: "spring", stiffness: 200, damping: 18, delay: (index % 4) * 0.07 }}
+      viewport={{ once: true, margin: "0px 0px 12% 0px" }}
+      transition={{ type: "spring", stiffness: 520, damping: 34, delay: (index % 4) * 0.03 }}
       style={{ perspective: 800 }}
     >
       <motion.div

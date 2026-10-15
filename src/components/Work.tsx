@@ -30,7 +30,7 @@ export function Work() {
 
         <div className="mt-14 space-y-6 sm:space-y-8">
           {projects.map((project, i) => (
-            <Reveal key={project.title} y={40}>
+            <Reveal key={project.title}>
               <article
                 id={`work-${slugify(project.title)}`}
                 className={`group grid scroll-mt-28 gap-6 rounded-[2rem] border border-border bg-surface p-3 sm:p-4 md:gap-10 ${

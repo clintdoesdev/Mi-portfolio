@@ -1,12 +1,13 @@
 "use client";
 
 import { useRef } from "react";
-import { setTheme, useTheme } from "@/lib/theme";
+import { setTheme, useFollowSystemTheme, useTheme } from "@/lib/theme";
 
 // A little keycap that flips light/dark and physically "clicks" down.
 export function ThemeToggle() {
   const theme = useTheme();
   const dark = theme === "dark";
+  useFollowSystemTheme();
   const ref = useRef<HTMLButtonElement>(null);
 
   function press() {

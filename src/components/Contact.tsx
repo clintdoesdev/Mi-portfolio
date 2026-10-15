@@ -28,7 +28,7 @@ const terminalLines: TerminalLine[] = [
 export function Contact() {
   return (
     <section id="contact" className="relative px-3 pb-3 sm:px-4 sm:pb-4">
-      <div className="relative overflow-hidden rounded-[2rem] bg-foreground px-5 py-14 text-background sm:rounded-[2.5rem] sm:px-10 sm:py-20 lg:px-14">
+      <div className="relative overflow-hidden rounded-[2rem] bg-panel px-5 py-14 text-panel-fg dark:border dark:border-border sm:rounded-[2.5rem] sm:px-10 sm:py-20 lg:px-14">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-[0.07] [background-image:radial-gradient(currentColor_1px,transparent_1px)] [background-size:22px_22px]"
@@ -54,7 +54,7 @@ export function Contact() {
               <p className="mt-8 font-display text-2xl font-bold tracking-tight sm:text-3xl">
                 Have an idea? Let&apos;s ship it.
               </p>
-              <p className="mt-3 max-w-md text-pretty text-background/65">
+              <p className="mt-3 max-w-md text-pretty text-panel-fg/65">
                 Landing page, marketing site, SaaS platform, internal tool, or a full product from zero — I build
                 all of it, remotely and across markets.
               </p>
@@ -70,7 +70,7 @@ export function Contact() {
                 </MagneticButton>
                 <MagneticButton
                   href={site.x}
-                  className="rounded-xl border border-background/25 px-6 py-3.5 text-sm font-semibold text-background transition-colors hover:border-background"
+                  className="rounded-xl border border-panel-fg/25 px-6 py-3.5 text-sm font-semibold text-panel-fg transition-colors hover:border-panel-fg"
                 >
                   Message on X
                 </MagneticButton>
@@ -79,7 +79,7 @@ export function Contact() {
               <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-4">
                 <a
                   href={`mailto:${site.email}`}
-                  className="font-mono text-sm text-background underline decoration-background/30 underline-offset-4 transition-colors hover:decoration-accent"
+                  className="font-mono text-sm text-panel-fg underline decoration-panel-fg/30 underline-offset-4 transition-colors hover:decoration-accent"
                 >
                   {site.email}
                 </a>
@@ -91,7 +91,7 @@ export function Contact() {
                       target={social.href.startsWith("mailto:") ? undefined : "_blank"}
                       rel="noreferrer"
                       aria-label={social.label}
-                      className="flex h-10 w-10 items-center justify-center rounded-xl border border-background/20 text-background transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-ink"
+                      className="flex h-10 w-10 items-center justify-center rounded-xl border border-panel-fg/20 text-panel-fg transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-ink"
                     >
                       {social.icon}
                     </a>

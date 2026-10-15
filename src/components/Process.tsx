@@ -30,26 +30,26 @@ export function Process() {
             aria-hidden
             initial={{ scaleY: 0 }}
             whileInView={{ scaleY: 1 }}
-            viewport={{ once: true, margin: "-20% 0px" }}
-            transition={{ duration: 1.2, ease: [0.65, 0, 0.35, 1] }}
+            viewport={{ once: true, margin: "0px 0px 10% 0px" }}
+            transition={{ duration: 0.5, ease: [0.65, 0, 0.35, 1] }}
             className="absolute bottom-8 left-[2.2rem] top-8 w-0.5 origin-top rounded-full bg-accent md:hidden"
           />
           <motion.span
             aria-hidden
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
-            viewport={{ once: true, margin: "-20% 0px" }}
-            transition={{ duration: 1.2, ease: [0.65, 0, 0.35, 1] }}
+            viewport={{ once: true, margin: "0px 0px 10% 0px" }}
+            transition={{ duration: 0.5, ease: [0.65, 0, 0.35, 1] }}
             className="absolute left-[12%] right-[12%] top-[2.2rem] hidden h-0.5 origin-left rounded-full bg-accent md:block"
           />
 
           {processSteps.map((step, i) => (
             <motion.li
               key={step.step}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-12% 0px" }}
-              transition={{ duration: 0.7, delay: 0.15 + i * 0.18, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: true, margin: "0px 0px 12% 0px" }}
+              transition={{ duration: 0.35, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
               className="relative flex gap-4 md:flex-col md:gap-5"
             >
               <span className="relative z-10 flex h-[4.4rem] w-[4.4rem] shrink-0 flex-col items-center justify-center rounded-2xl border border-border bg-surface shadow-soft md:mx-auto">

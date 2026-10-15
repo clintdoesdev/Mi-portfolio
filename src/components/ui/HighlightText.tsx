@@ -15,19 +15,27 @@ function Word({
   range: [number, number];
   marked: boolean;
 }) {
-  const opacity = useTransform(progress, range, [0.18, 1]);
   const sweep = useTransform(progress, range, [0, 1]);
+  // Fade the text colour rather than the element's opacity: it looks the same, but
+  // ~50 semi-transparent words would each become a separate layer to composite on
+  // every scroll frame. Highlighted words switch to dark ink once the marker
+  // arrives, so they never vanish against a dark background.
+  const color = useTransform(sweep, (v) =>
+    marked && v > 0.45
+      ? "var(--ink)"
+      : `color-mix(in srgb, var(--foreground) ${Math.round((0.18 + 0.82 * v) * 100)}%, transparent)`
+  );
 
   if (!marked) {
     return (
-      <motion.span style={{ opacity }} className="inline-block">
+      <motion.span style={{ color }} className="inline-block">
         {children}
       </motion.span>
     );
   }
 
   return (
-    <motion.span style={{ opacity }} className="relative isolate inline-block px-[0.06em] text-ink">
+    <motion.span style={{ color }} className="relative isolate inline-block px-[0.06em]">
       <motion.span
         aria-hidden
         style={{ scaleX: sweep }}

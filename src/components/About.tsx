@@ -37,8 +37,8 @@ function DevPass() {
           style={{ x, rotate, originY: 0 }}
           initial={{ opacity: 0, y: -60 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-10% 0px" }}
-          transition={{ type: "spring", stiffness: 90, damping: 11 }}
+          viewport={{ once: true, margin: "0px 0px 12% 0px" }}
+          transition={{ type: "spring", stiffness: 220, damping: 16 }}
           className={`flex flex-col items-center ${canDrag ? "cursor-grab" : ""}`}
         >
           <span aria-hidden className="h-6 w-12 rounded-b-xl rounded-t-md bg-gradient-to-b from-[#d6d6db] to-[#8f8f96] shadow-md" />
@@ -119,8 +119,8 @@ export function About() {
                 key={item}
                 initial={{ opacity: 0, x: -12 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-10% 0px" }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
+                viewport={{ once: true, margin: "0px 0px 12% 0px" }}
+                transition={{ duration: 0.3, delay: i * 0.04 }}
                 className="flex items-center gap-3 rounded-2xl border border-border bg-surface px-3.5 py-3 text-sm font-semibold sm:text-base"
               >
                 <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-accent text-ink">
@@ -134,7 +134,7 @@ export function About() {
                       initial={{ pathLength: 0 }}
                       whileInView={{ pathLength: 1 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 0.45, delay: 0.25 + i * 0.12 }}
+                      transition={{ duration: 0.3, delay: 0.1 + i * 0.05 }}
                     />
                   </svg>
                 </span>
@@ -174,8 +174,8 @@ export function About() {
             rel="noreferrer"
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-10% 0px" }}
-            transition={{ type: "spring", stiffness: 140, damping: 18, delay: 0.3 }}
+            viewport={{ once: true, margin: "0px 0px 12% 0px" }}
+            transition={{ type: "spring", stiffness: 320, damping: 28, delay: 0.05 }}
             className="shadow-soft flex w-full max-w-sm gap-3 rounded-3xl border border-border bg-surface p-4 transition-transform hover:-translate-y-1"
           >
             <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-neutral-950 text-white">

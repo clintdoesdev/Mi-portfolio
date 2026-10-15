@@ -13,6 +13,9 @@
   --faint: #aaa8a2;
   --accent: #f5d40e;
   --ink: #141416;
+  /* The contact panel: a dark card with light text in both themes. */
+  --panel: #141416;
+  --panel-fg: #f3f2ee;
   --shadow-color: 32 28 18;
 
   /* Keycaps: cream alphas, warm-grey modifiers. */
@@ -37,6 +40,7 @@
   --foreground: #f3f2ee;
   --muted: #9f9ea6;
   --faint: #5d5c63;
+  --panel: #19191d;
   --shadow-color: 0 0 0;
 
   --key-top: #3a3a41;
@@ -62,6 +66,8 @@
   --color-faint: var(--faint);
   --color-accent: var(--accent);
   --color-ink: var(--ink);
+  --color-panel: var(--panel);
+  --color-panel-fg: var(--panel-fg);
   --font-sans: var(--font-geist-sans);
   --font-display: var(--font-bricolage);
   --font-mono: var(--font-geist-mono);

@@ -18,14 +18,14 @@ export function Terminal({ lines, title }: { lines: TerminalLine[]; title: strin
         className="space-y-3 p-4 sm:p-5"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-15% 0px" }}
-        transition={{ staggerChildren: 0.35 }}
+        viewport={{ once: true, margin: "0px 0px 10% 0px" }}
+        transition={{ staggerChildren: 0.12 }}
       >
         {lines.map((line) => (
           <motion.div
             key={line.command}
             variants={{ hidden: { opacity: 0, y: 6 }, visible: { opacity: 1, y: 0 } }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.2 }}
           >
             <p className="break-words">
               <span className="text-accent">❯</span> <span className="text-white">{line.command}</span>

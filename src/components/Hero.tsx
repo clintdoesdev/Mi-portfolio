@@ -34,7 +34,7 @@ export function Hero() {
               alt=""
               priority
               sizes="48px"
-              className="h-full w-full scale-[1.35] object-cover object-[50%_40%]"
+              className="h-full w-full scale-[1.15] object-cover object-[50%_30%]"
             />
           </span>
           <span className="shadow-soft relative mb-3 rounded-2xl rounded-bl-sm border border-border bg-surface px-4 py-2 text-base font-medium sm:text-lg">

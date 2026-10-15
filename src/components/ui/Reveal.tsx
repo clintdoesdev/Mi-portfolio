@@ -6,7 +6,7 @@ import type { ReactNode } from "react";
 export function Reveal({
   children,
   delay = 0,
-  y = 24,
+  y = 14,
   className,
   as = "div",
 }: {
@@ -21,18 +21,20 @@ export function Reveal({
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] },
+      transition: { duration: 0.35, delay, ease: [0.16, 1, 0.3, 1] },
     },
   };
 
   const MotionTag = as === "span" ? motion.span : motion.div;
 
   return (
+    // Starts just before the element scrolls into view, so it has already landed
+    // by the time it's on screen.
     <MotionTag
       className={className}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
+      viewport={{ once: true, margin: "0px 0px 12% 0px" }}
       variants={variants}
     >
       {children}

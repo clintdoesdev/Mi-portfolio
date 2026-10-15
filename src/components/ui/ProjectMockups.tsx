@@ -228,7 +228,7 @@ function Laptop({ children }: { children: React.ReactNode }) {
 // The laptop, centred in a scene, showing the live site (or the illustration until it loads).
 function SceneLaptop({ live, title, screen }: { live?: string; title: string; screen: React.ReactNode }) {
   return (
-    <div className="absolute left-1/2 top-1/2 w-[74%] -translate-x-1/2 -translate-y-[44%] transition-transform duration-700 group-hover:-translate-y-[47%]">
+    <div className="absolute left-1/2 top-1/2 w-[74%] -translate-x-1/2 -translate-y-[44%] transition-transform duration-300 group-hover:-translate-y-[47%]">
       <Laptop>
         {live ? <LivePreview url={live} title={`Live preview of ${title}`} fallback={screen} /> : screen}
       </Laptop>

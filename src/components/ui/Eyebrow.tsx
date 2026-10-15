@@ -17,10 +17,10 @@ export function Eyebrow({
     <Reveal>
       <p
         className={`flex items-center gap-3 font-mono text-xs lowercase tracking-wide sm:text-sm ${
-          inverted ? "text-background/60" : "text-muted"
+          inverted ? "text-panel-fg/60" : "text-muted"
         } ${className}`}
       >
-        {index && <span className={inverted ? "text-background" : "text-foreground"}>{index}</span>}
+        {index && <span className={inverted ? "text-panel-fg" : "text-foreground"}>{index}</span>}
         <span className="h-px w-8 bg-accent" />
         <span>
           <span className="text-accent">{"//"}</span> {children}
